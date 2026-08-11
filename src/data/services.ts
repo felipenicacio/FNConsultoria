@@ -3,92 +3,93 @@
  *
  * GOVERNANÇA DE DADOS
  * ─────────────────────────────────────────────────────────────────────────
- * Camada (layer), ordem de exibição e destaque comercial de cada serviço
- * são definidos pela arquitetura aprovada no Notion e rastreados no Linear.
+ * Fonte de verdade: Notion — 📦 05 — Conteúdo dos Serviços
+ * Rastreamento: Linear — Fase 2 — Arquitetura de Serviços
  *
- * Campos marcados com [PROVISÓRIO] devem ser revisados após conclusão
- * das issues FEL-19 a FEL-28. Não substitua conteúdo provisório por
- * conteúdo definitivo sem a issue correspondente estar concluída.
+ * Camada (layer) e seoReady de cada serviço só mudam após aprovação
+ * no Notion e conclusão da issue correspondente no Linear.
  *
- * CAMADAS (aprovadas na FEL-18 — Notion: 🧭 02 — Arquitetura de Serviços)
+ * CAMADAS (aprovadas na FEL-18)
  * ─────────────────────────────────────────────────────────────────────────
  * 'primary'       → serviços principais, alta exposição na Home
  * 'complementary' → complementares/especializados, exposição secundária
  * 'transversal'   → capacidade transversal; não recebe card principal na Home
+ *
+ * SEO
+ * ─────────────────────────────────────────────────────────────────────────
+ * seoReady: true  → página indexável, canônica, presente no sitemap
+ * seoReady: false → noindex, sem canonical, sem OG, fora do sitemap
+ * Ativar por serviço após aprovação final de conteúdo (Fase 5).
  */
 
 export type ServiceLayer = 'primary' | 'transversal' | 'complementary';
 
 export interface Service {
-  /** Identificador único — usado como slug de URL em /servicos/[slug] */
+  /** Identificador único — slug de URL em /servicos/[slug] */
   slug: string;
   /** Título completo do serviço */
   title: string;
   /** Título curto para navegação, breadcrumbs e cards compactos */
   shortTitle: string;
   /**
-   * Camada comercial — define peso e exposição na Home.
+   * Camada comercial.
    * Só alterar após aprovação no Notion e conclusão da issue no Linear.
    */
   layer: ServiceLayer;
-  /** Descrição para cards na Home — [PROVISÓRIO até FEL-19 a FEL-28] */
+  /** Descrição para cards na Home — fonte: seção "Mensagem comercial base" do Notion */
   description: string;
-  /** Resultado esperado — [PROVISÓRIO até FEL-19 a FEL-28] */
+  /** Resultado resumido para card — fonte: "Resultado para card" do Notion */
   outcome: string;
-  /** Problema principal que o serviço resolve — [PROVISÓRIO até FEL-19 a FEL-28] */
+  /** Problema resumido para página de serviço — fonte: "Problema para página do site" */
   problem: string;
-  /** Contextos de compra — [PROVISÓRIO até FEL-19 a FEL-28] */
+  /** Contextos de compra resumidos — fonte: "Quando contratar" do Notion */
   whenToHire: string[];
   /** Referências metodológicas utilizadas */
   references?: string[];
   /**
-   * Slugs de serviços relacionados — preenchido definitivamente na FEL-24.
-   * [PROVISÓRIO]
+   * Slugs de serviços relacionados.
+   * Reflete a baseline vigente da arquitetura registrada no Notion
+   * e pode evoluir enquanto a FEL-24 permanecer aberta.
    */
   relatedSlugs?: string[];
   /**
-   * Indica se a página de serviço está pronta para indexação e sitemap.
-   *
-   * false (padrão enquanto FEL-19 a FEL-28 não forem concluídas):
-   *   - página recebe <meta name="robots" content="noindex, nofollow">
-   *   - rota excluída do sitemap gerado pelo @astrojs/sitemap
-   *   - rota e links na Home continuam funcionando normalmente
-   *
-   * true: somente após a issue Linear correspondente estar concluída
-   *   e o conteúdo definitivo aprovado no Notion.
+   * Controla indexação e presença no sitemap.
+   * false → noindex, sem canonical, sem OG, fora do sitemap.
+   * Ativar por serviço após aprovação final de conteúdo na Fase 5.
    */
   seoReady: boolean;
 }
 
-/**
- * Catálogo completo de serviços — 9 ofertas (aprovadas na FEL-18).
- *
- * STATUS DOS TEXTOS: provisório.
- * Conteúdo definitivo será registrado via FEL-19 a FEL-28.
- * A estrutura de dados (slugs, camadas, relações) está aprovada.
- */
 export const services: Service[] = [
+
   // ── SERVIÇOS PRINCIPAIS ────────────────────────────────────────────────
+  // Aprovados: FEL-19, FEL-20, FEL-21, FEL-22
+  // Fonte: Notion — 📦 05 — Conteúdo dos Serviços
 
   {
     slug: 'ciso-como-servico',
     title: 'CISO como Serviço',
     shortTitle: 'CISO como Serviço',
     layer: 'primary',
-    // [PROVISÓRIO — aguarda FEL-19]
+    // Fonte: seção 15 — Mensagem comercial base (FEL-19)
     description:
-      'Atuação estratégica para estruturar, direcionar e amadurecer a gestão de Segurança da Informação, conectando riscos cibernéticos, prioridades empresariais e tomada de decisão executiva.',
-    outcome: 'Governança e direcionamento contínuo da Segurança da Informação.',
+      'Liderança consultiva especializada para estruturar governança, priorizar riscos e investimentos e acompanhar continuamente a evolução da Segurança da Informação.',
+    outcome:
+      'Governança, prioridades e direcionamento contínuo da Segurança da Informação.',
+    // Fonte: seção 15 — Problema para página do site (FEL-19)
     problem:
-      'Ausência ou insuficiência de liderança especializada e de governança estruturada de Segurança da Informação.',
+      'Ausência ou insuficiência de liderança especializada para transformar riscos, iniciativas e necessidades de Segurança da Informação em decisões, prioridades e uma agenda estruturada de evolução.',
+    // Fonte: seção 4 — Quando contratar (FEL-19), resumido
     whenToHire: [
-      'Organização sem CISO ou sem estrutura formal de Segurança da Informação',
-      'Necessidade de direcionamento estratégico e priorização baseada em riscos',
-      'Necessidade de interlocução executiva sobre riscos cibernéticos',
+      'A organização não possui CISO dedicado, mas já necessita de direção especializada.',
+      'Existe equipe técnica, porém falta liderança estratégica e governança estruturada.',
+      'Riscos e investimentos de segurança chegam à liderança sem critérios consistentes de priorização.',
+      'Um assessment, auditoria ou roadmap precisa ser governado e acompanhado.',
+      'A direção precisa de indicadores e visão executiva sobre Segurança da Informação.',
     ],
     references: ['ISO/IEC 27001', 'NIST CSF 2.0', 'ISO 31000'],
     relatedSlugs: ['assessment-nist-csf', 'pesi', 'iso-27001'],
-    seoReady: false, // aguarda FEL-19
+    seoReady: false, // ativar após aprovação final na Fase 5
   },
 
   {
@@ -96,20 +97,25 @@ export const services: Service[] = [
     title: 'Assessment NIST Cybersecurity Framework 2.0',
     shortTitle: 'Assessment NIST CSF 2.0',
     layer: 'primary',
-    // [PROVISÓRIO — aguarda FEL-21]
+    // Fonte: seção 17 — Conteúdo-base para o site (FEL-21)
     description:
-      'Avaliação estruturada das capacidades de Segurança da Informação utilizando as funções Govern, Identify, Protect, Detect, Respond e Recover do NIST Cybersecurity Framework 2.0.',
-    outcome: 'Visão do cenário atual, lacunas e roadmap de evolução.',
+      'Avaliação estruturada do estado atual das capacidades de Segurança da Informação com base no NIST CSF 2.0, identificando lacunas, definindo o estado-alvo e priorizando a evolução.',
+    outcome:
+      'Current Profile, Target Profile, lacunas e prioridades para evolução.',
+    // Fonte: seção 2 — Problema resolvido (FEL-21), condensado
     problem:
-      'Ausência de visão clara sobre o estado atual, maturidade, lacunas e estado-alvo das capacidades de Segurança da Informação.',
+      'Ausência de visão consolidada do cenário atual de Segurança da Informação e dificuldade para identificar quais lacunas representam maior impacto, urgência ou risco.',
+    // Fonte: seção 4 — Quando contratar (FEL-21), resumido
     whenToHire: [
-      'Necessidade de entender o cenário atual de segurança com base em referência reconhecida',
-      'Preparação para auditorias, certificações ou programas estruturados de evolução',
-      'Dificuldade em priorizar investimentos e iniciativas de segurança',
+      'A organização não possui diagnóstico estruturado de suas capacidades de Segurança da Informação.',
+      'Há necessidade de baseline antes de criar um PESI ou roadmap de evolução.',
+      'A direção precisa de visão executiva sobre o estado atual e as principais lacunas.',
+      'A organização pretende estruturar ou amadurecer um SGSI.',
+      'Auditorias, clientes ou requisitos externos apontam necessidade de maior estruturação.',
     ],
     references: ['NIST CSF 2.0', 'ISO/IEC 27001', 'ISO 31000'],
     relatedSlugs: ['pesi', 'ciso-como-servico', 'iso-27001'],
-    seoReady: false, // aguarda FEL-21
+    seoReady: false,
   },
 
   {
@@ -117,20 +123,25 @@ export const services: Service[] = [
     title: 'PESI — Plano Estratégico de Segurança da Informação',
     shortTitle: 'PESI',
     layer: 'primary',
-    // [PROVISÓRIO — aguarda FEL-20]
+    // Fonte: seção 15 — Mensagem comercial base (FEL-20)
     description:
-      'Estruturação de objetivos, iniciativas, indicadores, prioridades e roadmap para conectar a evolução da Segurança da Informação aos objetivos do negócio.',
-    outcome: 'Plano estratégico priorizado e orientado por riscos.',
+      'Estruturação de objetivos, iniciativas, indicadores e roadmap para conectar a evolução da Segurança da Informação aos riscos e prioridades reais do negócio.',
+    outcome:
+      'Direcionamento estratégico, prioridades e roadmap de evolução da Segurança da Informação.',
+    // Fonte: seção 2 — Problema resolvido (FEL-20), condensado
     problem:
-      'Falta de clareza sobre prioridades, objetivos, investimentos, responsabilidades ou roadmap de Segurança da Informação.',
+      'Ausência de estratégia formal de Segurança da Informação, com iniciativas fragmentadas e sem priorização baseada em risco, roadmap consolidado ou alinhamento com os objetivos do negócio.',
+    // Fonte: seção 4 — Quando contratar (FEL-20), resumido
     whenToHire: [
-      'Ausência de direcionamento estratégico de segurança',
-      'Necessidade de transformar diagnóstico em plano executável e priorizado',
-      'Demanda por clareza sobre iniciativas, responsáveis e horizonte de evolução',
+      'A organização não possui direcionamento estratégico formal para Segurança da Informação.',
+      'Existe um Assessment ou auditoria com recomendações que precisam ser priorizadas.',
+      'Há dificuldade para justificar investimentos e iniciativas à alta administração.',
+      'O programa de segurança cresceu de forma reativa e precisa ser reorganizado.',
+      'É necessário estabelecer objetivos, indicadores, responsáveis e horizonte de evolução.',
     ],
     references: ['ISO/IEC 27001', 'NIST CSF 2.0', 'ISO 31000'],
-    relatedSlugs: ['ciso-como-servico', 'iso-27001'],
-    seoReady: false, // aguarda FEL-20
+    relatedSlugs: ['assessment-nist-csf', 'ciso-como-servico', 'iso-27001'],
+    seoReady: false,
   },
 
   {
@@ -138,65 +149,79 @@ export const services: Service[] = [
     title: 'Implementação de SGSI baseado na ISO/IEC 27001',
     shortTitle: 'SGSI ISO/IEC 27001',
     layer: 'primary',
-    // [PROVISÓRIO — aguarda FEL-22]
+    // Fonte: seção 16 — Conteúdo-base para o site (FEL-22)
     description:
-      'Estruturação e implementação de um Sistema de Gestão de Segurança da Informação alinhado ao contexto, riscos, processos, controles e objetivos da organização.',
-    outcome: 'SGSI sustentável e integrado à gestão organizacional.',
+      'Estruturação e implementação de um Sistema de Gestão de Segurança da Informação conectado a riscos, responsabilidades e necessidades reais do negócio.',
+    outcome:
+      'SGSI estruturado, operável e preparado para evolução contínua e futuras avaliações.',
+    // Fonte: seção 16 — Problema resumido (FEL-22)
     problem:
-      'Necessidade de estruturar formalmente o sistema de gestão, atender requisitos normativos ou preparar a organização para certificação.',
+      'Controles, documentos e iniciativas fragmentados, sem um sistema integrado de governança, riscos, evidências e melhoria contínua.',
+    // Fonte: seção 16 — Quando contratar (FEL-22), resumido
     whenToHire: [
-      'Necessidade de estruturar formalmente a gestão de segurança',
-      'Preparação para certificação ISO/IEC 27001',
-      'Requisitos contratuais, regulatórios ou de clientes que exigem conformidade',
+      'Há necessidade de estruturar formalmente a gestão de Segurança da Informação.',
+      'Clientes ou contratos exigem demonstração de maturidade e controles estruturados.',
+      'Um assessment ou auditoria identificou lacunas relevantes de gestão.',
+      'A organização está em preparação para uma futura certificação ISO/IEC 27001.',
+      'Políticas e controles existentes não formam um sistema sustentável e auditável.',
     ],
     references: ['ISO/IEC 27001', 'ISO/IEC 27002', 'ISO/IEC 27005'],
-    relatedSlugs: ['auditoria-readiness', 'ciso-como-servico'],
-    seoReady: false, // aguarda FEL-22
+    relatedSlugs: ['assessment-nist-csf', 'pesi', 'ciso-como-servico', 'auditoria-readiness'],
+    seoReady: false,
   },
 
   // ── CAPACIDADE TRANSVERSAL ─────────────────────────────────────────────
+  // Aprovado: FEL-25
+  // Nota (FEL-18): não exposta como card principal na Home;
+  // comunicada como capacidade metodológica transversal.
 
   {
     slug: 'gestao-de-riscos',
     title: 'Gestão de Riscos de Segurança da Informação',
     shortTitle: 'Gestão de Riscos',
     layer: 'transversal',
-    // [PROVISÓRIO — aguarda FEL-25]
     description:
-      'Estruturação de metodologia, critérios, inventário de riscos, avaliações, plano de tratamento e mecanismos de acompanhamento orientados ao contexto e prioridades da organização.',
-    outcome: 'Metodologia de riscos estruturada e integrada à gestão organizacional.',
+      'Estruturação de metodologia, critérios, inventário de riscos, planos de tratamento e mecanismos de acompanhamento orientados ao contexto e às prioridades da organização.',
+    outcome:
+      'Metodologia de riscos estruturada e integrada à gestão organizacional.',
     problem:
       'Ausência de método consistente de identificação, análise, avaliação, priorização, tratamento e acompanhamento de riscos de Segurança da Informação.',
     whenToHire: [
-      'Necessidade de estruturar ou revisar metodologia de gestão de riscos de segurança',
-      'Organização com estrutura existente que precisa formalizar e operacionalizar riscos',
+      'A organização precisa estruturar ou revisar a metodologia de gestão de riscos de segurança.',
+      'Há estrutura de segurança existente, mas a gestão de riscos é informal ou inconsistente.',
     ],
     references: ['ISO 31000', 'ISO/IEC 27005', 'NIST RMF'],
     relatedSlugs: ['ciso-como-servico', 'pesi', 'iso-27001'],
-    seoReady: false, // aguarda FEL-25
+    seoReady: false,
   },
 
   // ── SERVIÇOS COMPLEMENTARES E ESPECIALIZADOS ───────────────────────────
+  // Aprovados: FEL-23, FEL-26, FEL-27, FEL-28
+  // Exposição secundária na Home; páginas completas na Fase 5.
 
   {
     slug: 'conscientizacao',
     title: 'Programa de Conscientização em Segurança da Informação',
     shortTitle: 'Conscientização',
     layer: 'complementary',
-    // [PROVISÓRIO — aguarda FEL-23]
+    // Fonte: seção 16 — Conteúdo-base para o site (FEL-23)
     description:
-      'Programa contínuo de conscientização orientado a comportamento, percepção de risco, comunicação, treinamento, simulações e acompanhamento da evolução da cultura de segurança.',
-    outcome: 'Maior capacidade das pessoas para reconhecer, evitar e reportar riscos.',
+      'Programa contínuo de conscientização que combina diagnóstico, segmentação de públicos, trilhas de aprendizagem, campanhas, simulações e indicadores para desenvolver comportamentos mais seguros.',
+    outcome:
+      'Trilhas, campanhas, simulações e indicadores para desenvolver cultura e acompanhar a evolução do risco humano.',
+    // Fonte: seção 2 — Problema resolvido (FEL-23), condensado
     problem:
-      'Comportamentos de risco, incidentes humanos, exigências de compliance ou necessidade de cultura de segurança contínua.',
+      'Treinamentos pontuais ou genéricos sem continuidade, medição de comportamento ou segmentação por público e nível de exposição.',
+    // Fonte: seção 16 — Quando contratar (FEL-23), resumido
     whenToHire: [
-      'Incidentes causados por comportamento humano',
-      'Necessidade de estruturar cultura de segurança de forma contínua',
-      'Requisitos de compliance, certificação ou auditoria relacionados à conscientização',
+      'Os treinamentos atuais são pontuais ou genéricos.',
+      'Incidentes ou simulações indicam exposição relevante ao risco humano.',
+      'Assessments ou auditorias identificaram lacunas de conscientização.',
+      'A organização precisa de um programa contínuo, segmentado e mensurável.',
     ],
     references: ['ISO/IEC 27001', 'NIST CSF 2.0'],
-    relatedSlugs: ['ciso-como-servico', 'iso-27001'],
-    seoReady: false, // aguarda FEL-23
+    relatedSlugs: ['ciso-como-servico', 'iso-27001', 'gestao-de-riscos'],
+    seoReady: false,
   },
 
   {
@@ -204,20 +229,21 @@ export const services: Service[] = [
     title: 'Auditoria Interna e Readiness de Segurança da Informação',
     shortTitle: 'Auditoria e Readiness',
     layer: 'complementary',
-    // [PROVISÓRIO — aguarda FEL-28]
+    // Aprovado: FEL-28
     description:
       'Avaliação independente da conformidade e eficácia dos controles implementados, ou preparação estruturada para auditorias e certificações, com identificação de lacunas e plano de ação.',
-    outcome: 'Visão independente do estado atual e plano de preparação ou correção.',
+    outcome:
+      'Visão independente do estado atual e plano de preparação ou correção.',
     problem:
-      'Necessidade de avaliação independente dos controles, preparação para certificação ou verificação de conformidade e eficácia.',
+      'Necessidade de avaliação independente dos controles implementados, preparação estruturada para certificação ou verificação de conformidade e eficácia.',
     whenToHire: [
-      'Preparação para auditoria de certificação ISO/IEC 27001',
-      'Necessidade de avaliação independente dos controles implementados',
-      'Requisitos internos ou externos de verificação de conformidade',
+      'A organização se prepara para auditoria de certificação ISO/IEC 27001.',
+      'Há necessidade de avaliação independente dos controles existentes.',
+      'Requisitos internos ou externos exigem verificação de conformidade.',
     ],
     references: ['ISO/IEC 27001', 'ISO/IEC 27007'],
-    relatedSlugs: ['iso-27001', 'pesi'],
-    seoReady: false, // aguarda FEL-28
+    relatedSlugs: ['iso-27001', 'pesi', 'ciso-como-servico'],
+    seoReady: false,
   },
 
   {
@@ -225,20 +251,21 @@ export const services: Service[] = [
     title: 'Continuidade de Negócios e Resiliência',
     shortTitle: 'Continuidade de Negócios',
     layer: 'complementary',
-    // [PROVISÓRIO — aguarda FEL-26]
+    // Aprovado: FEL-26
     description:
       'Estruturação de programa de continuidade orientado a processos críticos, estratégias de recuperação, planos de crise, governança e exercícios periódicos de resiliência organizacional.',
-    outcome: 'Capacidade de resposta e recuperação diante de interrupções e crises.',
+    outcome:
+      'Capacidade de resposta e recuperação diante de interrupções e crises.',
     problem:
-      'Dependência de processos críticos sem planos de continuidade, fragilidade de recuperação ou pressão regulatória e contratual por resiliência.',
+      'Dependência de processos críticos sem planos de continuidade formalizados, fragilidade de recuperação ou pressão regulatória e contratual por resiliência.',
     whenToHire: [
-      'Ausência de BIA e estratégias de continuidade formalizadas',
-      'Requisitos regulatórios, contratuais ou de clientes por resiliência operacional',
-      'Necessidade de estruturar planos de crise e exercícios periódicos',
+      'A organização não possui BIA ou estratégias formalizadas de continuidade.',
+      'Requisitos regulatórios ou contratuais exigem demonstração de resiliência.',
+      'Há necessidade de estruturar planos de crise e exercícios periódicos.',
     ],
     references: ['ISO 22301', 'ISO 31000'],
     relatedSlugs: ['ciso-como-servico', 'gestao-de-riscos'],
-    seoReady: false, // aguarda FEL-26
+    seoReady: false,
   },
 
   {
@@ -246,21 +273,23 @@ export const services: Service[] = [
     title: 'Governança de Privacidade e Proteção de Dados',
     shortTitle: 'Privacidade e Dados',
     layer: 'complementary',
-    // [PROVISÓRIO — aguarda FEL-27]
+    // Aprovado: FEL-27
     description:
       'Estruturação de modelo de governança de privacidade com papéis, políticas, processos, gestão de riscos à privacidade e integração com Segurança da Informação.',
-    outcome: 'Governança de privacidade estruturada e integrada à gestão de riscos.',
+    outcome:
+      'Governança de privacidade estruturada e integrada à gestão de riscos.',
     problem:
-      'Necessidade de estruturar governança de privacidade, atender requisitos de proteção de dados ou integrar DPO, Segurança e Riscos.',
+      'Necessidade de estruturar governança de privacidade, atender requisitos de proteção de dados ou integrar DPO, Segurança da Informação e Riscos de forma consistente.',
     whenToHire: [
-      'Requisitos de adequação à LGPD ou GDPR',
-      'Necessidade de estruturar governança de privacidade de forma integrada',
-      'Integração de privacidade com Segurança da Informação e gestão de riscos',
+      'A organização precisa atender requisitos de adequação à LGPD ou GDPR.',
+      'Há necessidade de estruturar governança de privacidade de forma integrada.',
+      'Privacidade precisa ser integrada à Segurança da Informação e à gestão de riscos.',
     ],
     references: ['ISO/IEC 27701', 'ISO/IEC 27001', 'ISO 31000'],
     relatedSlugs: ['ciso-como-servico', 'gestao-de-riscos', 'iso-27001'],
-    seoReady: false, // aguarda FEL-27
+    seoReady: false,
   },
+
 ];
 
 // ── FILTROS UTILITÁRIOS ──────────────────────────────────────────────────
@@ -279,15 +308,15 @@ export function getServiceBySlug(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);
 }
 
-/** Todos os slugs — usado para geração de rotas estáticas (inclui provisórios) */
+/** Todos os slugs — usado para geração de rotas estáticas (inclui não indexáveis) */
 export function getAllServiceSlugs(): string[] {
   return services.map((s) => s.slug);
 }
 
 /**
- * Slugs de serviços prontos para indexação.
+ * Slugs prontos para indexação.
  * Usado pelo filtro do sitemap em astro.config.mjs.
- * Atualizar conforme as FEL-19 a FEL-28 forem concluídas (seoReady: true).
+ * Setar seoReady: true por serviço conforme aprovação na Fase 5.
  */
 export const seoReadySlugs = new Set(
   services.filter((s) => s.seoReady).map((s) => s.slug),

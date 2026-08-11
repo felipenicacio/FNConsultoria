@@ -2,33 +2,55 @@
 /**
  * Corpo da página de serviço.
  *
- * CONTEÚDO DEFINITIVO PENDENTE
- * ─────────────────────────────────────────────────────────────────────────
- * As seções de escopo, abordagem, etapas, entregáveis e CTA específico
- * serão adicionadas após conclusão das issues FEL-19 a FEL-28 no Linear.
- * Este componente exibe as referências metodológicas (disponíveis) e
- * um CTA genérico enquanto o conteúdo detalhado não está aprovado.
+ * Exibe os dados aprovados no Notion via services.ts:
+ *   - Quando contratar (whenToHire)
+ *   - Referências metodológicas (references)
+ *   - CTA genérico de contato
+ *
+ * Conteúdo adicional — escopo completo, etapas, entregáveis e CTA
+ * específico por serviço — será adicionado na Fase 5 após aprovação
+ * do design e do conteúdo editorial definitivo.
  */
 import type { Service } from '../data/services';
 
 interface Props {
   service: Service;
 }
-
 const { service } = Astro.props;
 ---
 
 <div class="service-body">
 
+  <!-- Quando contratar -->
+  {service.whenToHire && service.whenToHire.length > 0 && (
+    <section class="when-section section" aria-labelledby="quando-title">
+      <div class="container when-grid">
+        <div class="when-heading">
+          <p class="eyebrow">Quando contratar</p>
+          <h2 id="quando-title">Este serviço é indicado quando</h2>
+        </div>
+        <ol class="when-list" aria-label="Contextos de contratação">
+          {service.whenToHire.map((item, i) => (
+            <li>
+              <span class="when-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <p>{item}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  <!-- Referências metodológicas -->
   {service.references && service.references.length > 0 && (
     <section class="references-section section" aria-labelledby="referencias-title">
       <div class="container">
         <p class="eyebrow">Referências metodológicas</p>
-        <h2 id="referencias-title">Frameworks e normas utilizados</h2>
-        <p class="lead">
+        <h2 id="referencias-title">Normas e frameworks utilizados</h2>
+        <p class="lead ref-lead">
           A atuação da FN Consulting utiliza normas e frameworks reconhecidos
           internacionalmente como instrumentos de estruturação e referência,
-          e não como fins em si mesmos.
+          não como fins em si mesmos.
         </p>
         <ul class="ref-tags" aria-label="Normas e frameworks deste serviço">
           {service.references.map((ref) => (
@@ -39,6 +61,7 @@ const { service } = Astro.props;
     </section>
   )}
 
+  <!-- CTA de contato -->
   <section class="cta-section section">
     <div class="container">
       <div class="cta-box">
@@ -71,8 +94,57 @@ const { service } = Astro.props;
 </div>
 
 <style>
+  /* Quando contratar */
+  .when-section { background: var(--white); }
+
+  .when-grid {
+    display: grid;
+    grid-template-columns: .75fr 1.25fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .when-heading { position: sticky; top: 110px; }
+  .when-heading h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+
+  .when-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .when-list li {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .when-list li:first-child { border-top: 1px solid var(--slate-200); }
+
+  .when-index {
+    color: var(--blue-600);
+    font-size: .7rem;
+    font-weight: 900;
+    letter-spacing: .12em;
+    padding-top: .18rem;
+  }
+
+  .when-list p {
+    margin: 0;
+    color: var(--navy-900);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  /* Referências */
   .references-section { background: var(--slate-100); }
   .references-section h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+  .ref-lead { max-width: 64ch; }
 
   .ref-tags {
     list-style: none;
@@ -93,6 +165,7 @@ const { service } = Astro.props;
     font-weight: 700;
   }
 
+  /* CTA */
   .cta-section { background: var(--white); }
 
   .cta-box {
@@ -116,7 +189,6 @@ const { service } = Astro.props;
     border-radius: 50%;
     box-shadow: 0 0 0 60px rgba(23,105,224,.025);
   }
-
   .cta-content, .cta-action { position: relative; z-index: 1; }
   .cta-box .eyebrow { color: #7dd3fc; }
   .cta-box h2 { color: white; font-size: clamp(1.6rem, 3vw, 2.5rem); max-width: 22ch; }
@@ -139,6 +211,10 @@ const { service } = Astro.props;
   }
   .back-link:hover { color: white; }
 
+  @media (max-width: 860px) {
+    .when-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .when-heading { position: static; }
+  }
   @media (max-width: 760px) {
     .cta-box { grid-template-columns: 1fr; gap: 2rem; }
   }
