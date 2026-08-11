@@ -1,0 +1,31 @@
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>FN Consulting</strong>
+      <p>Segurança da Informação · Governança · Gestão de Riscos · Continuidade de Negócios · Privacidade</p>
+      <small>Felipe Nicácio</small>
+    </div>
+    <nav aria-label="Navegação do rodapé">
+      <a href="#servicos">Serviços</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+  <div class="container legal">
+    <small>As informações apresentadas possuem caráter institucional e informativo e não representam garantia de certificação, conformidade integral ou eliminação de riscos.</small>
+  </div>
+</footer>
+
+<style>
+  .footer { padding: 3.5rem 0 2rem; background: var(--navy-950); color: white; }
+  .footer-grid { display: flex; justify-content: space-between; gap: 3rem; }
+  strong { font-size: 1.2rem; }
+  p, small { color: #94a3b8; }
+  p { max-width: 58ch; }
+  nav { display: flex; gap: 1rem; flex-wrap: wrap; align-content: flex-start; }
+  nav a { color: #cbd5e1; }
+  nav a:hover { color: white; }
+  .legal { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1); }
+  @media (max-width: 700px) { .footer-grid { flex-direction: column; } }
+</style>
