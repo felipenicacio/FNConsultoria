@@ -8,16 +8,19 @@ const methods = [
 ];
 const references = ['ISO/IEC 27001', 'ISO/IEC 27002', 'ISO/IEC 27005', 'ISO/IEC 27701', 'ISO 22301', 'ISO 31000', 'NIST CSF 2.0', 'NIST RMF'];
 ---
-<section id="metodologia" class="section">
+<section id="metodologia" class="section methodology-section">
   <div class="container">
-    <div class="section-header">
-      <p class="eyebrow">Metodologia</p>
-      <h2>Da compreensão do cenário à evolução.</h2>
+    <div class="section-header method-header">
+      <div>
+        <p class="eyebrow">Metodologia</p>
+        <h2>Da compreensão do cenário à evolução.</h2>
+      </div>
+      <p class="lead">Uma abordagem consultiva baseada em contexto, evidências e prioridades, evitando implementações desconectadas da realidade da organização.</p>
     </div>
-    <div class="grid grid-3 method-grid">
+    <div class="method-grid">
       {methods.map(([title, text], index) => (
         <article class="method">
-          <span>{String(index + 1).padStart(2, '0')}</span>
+          <div class="method-marker"><span>{String(index + 1).padStart(2, '0')}</span></div>
           <h3>{title}</h3>
           <p>{text}</p>
         </article>
@@ -40,16 +43,24 @@ const references = ['ISO/IEC 27001', 'ISO/IEC 27002', 'ISO/IEC 27005', 'ISO/IEC 
 </section>
 
 <style>
-  .method-grid { grid-template-columns: repeat(5, 1fr); }
-  .method { padding-top: 1.2rem; border-top: 2px solid var(--navy-950); }
-  .method span { color: var(--blue-600); font-size: .75rem; font-weight: 900; }
-  .method h3 { margin: 1.8rem 0 .5rem; }
-  .references { background: var(--navy-950); color: white; }
+  .methodology-section { background: var(--slate-100); }
+  .method-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
+  .method-header .lead { margin: 0; }
+  .method-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  .method { padding: 1.4rem 1.2rem 1.5rem 0; border-top: 1px solid var(--slate-300); }
+  .method-marker { display: flex; align-items: center; gap: .65rem; }
+  .method-marker::after { content: ""; width: 28px; height: 1px; background: var(--teal-500); }
+  .method span { color: var(--blue-600); font-size: .72rem; font-weight: 900; letter-spacing: .12em; }
+  .method h3 { margin: 2.1rem 0 .6rem; }
+  .method p { margin-bottom: 0; font-size: .94rem; }
+  .references { position: relative; background: var(--navy-950); color: white; overflow: hidden; }
+  .references::after { content: ""; position: absolute; width: 420px; height: 420px; right: -140px; top: -180px; border: 1px solid rgba(125,211,252,.12); border-radius: 50%; box-shadow: 0 0 0 70px rgba(23,105,224,.025), 0 0 0 140px rgba(26,167,161,.018); }
   .references h2 { color: white; }
+  .references .eyebrow { color: #7dd3fc; }
   .references .lead { color: #cbd5e1; }
-  .reference-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center; }
-  .tags { display: flex; flex-wrap: wrap; gap: .7rem; }
-  .tags span { padding: .75rem 1rem; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: #e2e8f0; background: rgba(255,255,255,.04); }
-  @media (max-width: 900px) { .method-grid { grid-template-columns: repeat(2,1fr); } .reference-grid { grid-template-columns: 1fr; } }
+  .reference-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.08fr .92fr; gap: 4.5rem; align-items: center; }
+  .tags { display: flex; flex-wrap: wrap; gap: .65rem; }
+  .tags span { padding: .72rem .95rem; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; color: #e2e8f0; background: rgba(255,255,255,.035); font-size: .86rem; font-weight: 650; }
+  @media (max-width: 900px) { .method-header, .reference-grid { grid-template-columns: 1fr; gap: 1.5rem; } .method-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 520px) { .method-grid { grid-template-columns: 1fr; } }
 </style>
