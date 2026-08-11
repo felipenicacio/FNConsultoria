@@ -1,0 +1,38 @@
+---
+const steps = [
+  ['Avaliar', 'Assessment NIST CSF 2.0'],
+  ['Planejar', 'PESI'],
+  ['Governar', 'CISO como Serviço'],
+  ['Implementar', 'SGSI ISO/IEC 27001'],
+  ['Desenvolver cultura', 'Conscientização'],
+  ['Evoluir', 'Melhoria contínua']
+];
+---
+<section class="section section-soft" aria-labelledby="jornada-title">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow">Jornada</p>
+      <h2 id="jornada-title">Uma evolução integrada em Segurança da Informação.</h2>
+    </div>
+    <ol class="journey">
+      {steps.map(([step, service], index) => (
+        <li>
+          <span class="index">{String(index + 1).padStart(2, '0')}</span>
+          <strong>{step}</strong>
+          <small>{service}</small>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .journey { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+  li { padding: 1.4rem; min-height: 180px; display: flex; flex-direction: column; border-right: 1px solid var(--slate-200); }
+  li:last-child { border-right: 0; }
+  .index { color: var(--blue-600); font-size: .75rem; font-weight: 900; }
+  strong { margin-top: auto; font-size: 1rem; }
+  small { margin-top: .35rem; color: var(--slate-500); line-height: 1.35; }
+  @media (max-width: 950px) { .journey { grid-template-columns: repeat(2, 1fr); } li { border-bottom: 1px solid var(--slate-200); } }
+  @media (max-width: 520px) { .journey { grid-template-columns: 1fr; } li { min-height: 135px; border-right: 0; } }
+</style>
