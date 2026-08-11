@@ -14,7 +14,7 @@ import { seoReadySlugs } from './src/data/services.ts';
  */
 const SITE_URL =
   process.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||
-  'https://placeholder.fnconsulting.com.br';
+  'https://placeholder.fnsecurity.com.br';
 
 export default defineConfig({
   site: SITE_URL,
