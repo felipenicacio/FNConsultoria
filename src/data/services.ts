@@ -46,6 +46,18 @@ export interface Service {
    * [PROVISÓRIO]
    */
   relatedSlugs?: string[];
+  /**
+   * Indica se a página de serviço está pronta para indexação e sitemap.
+   *
+   * false (padrão enquanto FEL-19 a FEL-28 não forem concluídas):
+   *   - página recebe <meta name="robots" content="noindex, nofollow">
+   *   - rota excluída do sitemap gerado pelo @astrojs/sitemap
+   *   - rota e links na Home continuam funcionando normalmente
+   *
+   * true: somente após a issue Linear correspondente estar concluída
+   *   e o conteúdo definitivo aprovado no Notion.
+   */
+  seoReady: boolean;
 }
 
 /**
@@ -76,6 +88,7 @@ export const services: Service[] = [
     ],
     references: ['ISO/IEC 27001', 'NIST CSF 2.0', 'ISO 31000'],
     relatedSlugs: ['assessment-nist-csf', 'pesi', 'iso-27001'],
+    seoReady: false, // aguarda FEL-19
   },
 
   {
@@ -96,6 +109,7 @@ export const services: Service[] = [
     ],
     references: ['NIST CSF 2.0', 'ISO/IEC 27001', 'ISO 31000'],
     relatedSlugs: ['pesi', 'ciso-como-servico', 'iso-27001'],
+    seoReady: false, // aguarda FEL-21
   },
 
   {
@@ -116,6 +130,7 @@ export const services: Service[] = [
     ],
     references: ['ISO/IEC 27001', 'NIST CSF 2.0', 'ISO 31000'],
     relatedSlugs: ['ciso-como-servico', 'iso-27001'],
+    seoReady: false, // aguarda FEL-20
   },
 
   {
@@ -136,6 +151,7 @@ export const services: Service[] = [
     ],
     references: ['ISO/IEC 27001', 'ISO/IEC 27002', 'ISO/IEC 27005'],
     relatedSlugs: ['auditoria-readiness', 'ciso-como-servico'],
+    seoReady: false, // aguarda FEL-22
   },
 
   // ── CAPACIDADE TRANSVERSAL ─────────────────────────────────────────────
@@ -157,6 +173,7 @@ export const services: Service[] = [
     ],
     references: ['ISO 31000', 'ISO/IEC 27005', 'NIST RMF'],
     relatedSlugs: ['ciso-como-servico', 'pesi', 'iso-27001'],
+    seoReady: false, // aguarda FEL-25
   },
 
   // ── SERVIÇOS COMPLEMENTARES E ESPECIALIZADOS ───────────────────────────
@@ -179,6 +196,7 @@ export const services: Service[] = [
     ],
     references: ['ISO/IEC 27001', 'NIST CSF 2.0'],
     relatedSlugs: ['ciso-como-servico', 'iso-27001'],
+    seoReady: false, // aguarda FEL-23
   },
 
   {
@@ -199,6 +217,7 @@ export const services: Service[] = [
     ],
     references: ['ISO/IEC 27001', 'ISO/IEC 27007'],
     relatedSlugs: ['iso-27001', 'pesi'],
+    seoReady: false, // aguarda FEL-28
   },
 
   {
@@ -219,6 +238,7 @@ export const services: Service[] = [
     ],
     references: ['ISO 22301', 'ISO 31000'],
     relatedSlugs: ['ciso-como-servico', 'gestao-de-riscos'],
+    seoReady: false, // aguarda FEL-26
   },
 
   {
@@ -239,6 +259,7 @@ export const services: Service[] = [
     ],
     references: ['ISO/IEC 27701', 'ISO/IEC 27001', 'ISO 31000'],
     relatedSlugs: ['ciso-como-servico', 'gestao-de-riscos', 'iso-27001'],
+    seoReady: false, // aguarda FEL-27
   },
 ];
 
@@ -258,7 +279,16 @@ export function getServiceBySlug(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);
 }
 
-/** Todos os slugs — usado para geração de rotas estáticas */
+/** Todos os slugs — usado para geração de rotas estáticas (inclui provisórios) */
 export function getAllServiceSlugs(): string[] {
   return services.map((s) => s.slug);
 }
+
+/**
+ * Slugs de serviços prontos para indexação.
+ * Usado pelo filtro do sitemap em astro.config.mjs.
+ * Atualizar conforme as FEL-19 a FEL-28 forem concluídas (seoReady: true).
+ */
+export const seoReadySlugs = new Set(
+  services.filter((s) => s.seoReady).map((s) => s.slug),
+);

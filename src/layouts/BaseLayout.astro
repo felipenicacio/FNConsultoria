@@ -10,9 +10,30 @@ interface Props {
   structuredData?: Record<string, unknown>;
   /** URL relativa de imagem para Open Graph, ex: '/og/home.png' */
   ogImage?: string;
+  /**
+   * Quando true, emite <meta name="robots" content="noindex, nofollow">
+   * e omite canonical, OG e link para sitemap.
+   * Usar em: páginas 404, páginas de serviço com seoReady: false.
+   */
+  noindex?: boolean;
 }
 
-const SITE_URL = 'https://fnconsulting.com.br';
+/**
+ * Domínio do site.
+ *
+ * Em desenvolvimento ou enquanto o domínio definitivo não estiver aprovado
+ * (Fase 7 — QA e Publicação V1), define PUBLIC_SITE_URL na variável de
+ * ambiente para sobrescrever o placeholder.
+ *
+ * Cloudflare Pages: Settings → Environment variables → PUBLIC_SITE_URL
+ * Desenvolvimento local: .env → PUBLIC_SITE_URL=http://localhost:4321
+ *
+ * O fallback abaixo é intencional — sinaliza que o domínio ainda não foi
+ * aprovado. Não o substitua por um domínio fixo antes da Fase 7.
+ */
+const SITE_URL =
+  import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||
+  'https://placeholder.fnconsulting.com.br';
 
 const {
   title = 'FN Consulting | Segurança da Informação e Gestão de Riscos',
@@ -20,6 +41,7 @@ const {
   canonicalPath = '',
   ogImage,
   structuredData,
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL =
@@ -60,25 +82,32 @@ const ogImageURL = ogImage ? `${SITE_URL}${ogImage}` : undefined;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#07111f" />
-    <meta name="robots" content="index, follow" />
+    {noindex
+      ? <meta name="robots" content="noindex, nofollow" />
+      : <meta name="robots" content="index, follow" />
+    }
 
-    <link rel="canonical" href={canonicalURL} />
+    {!noindex && <link rel="canonical" href={canonicalURL} />}
 
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="FN Consulting" />
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalURL} />
-    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+    {!noindex && (
+      <>
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="FN Consulting" />
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalURL} />
+        {ogImageURL && <meta property="og:image" content={ogImageURL} />}
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+      </>
+    )}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    {!noindex && <link rel="sitemap" href="/sitemap-index.xml" />}
 
     <title>{title}</title>
 

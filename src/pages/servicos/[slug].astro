@@ -44,6 +44,7 @@ const structuredData = {
   description={service.description}
   canonicalPath={`/servicos/${service.slug}`}
   structuredData={structuredData}
+  noindex={!service.seoReady}
 >
   <Header />
   <main id="conteudo-principal">
