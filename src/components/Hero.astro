@@ -1,34 +1,55 @@
 <section id="inicio" class="hero">
   <div class="container hero-grid">
-    <div>
+    <div class="hero-content">
       <p class="eyebrow">FN Consulting</p>
+      <p class="positioning">Segurança da Informação · Governança · Riscos · Resiliência</p>
       <h1>Segurança da Informação conectada à estratégia do negócio.</h1>
-      <p class="hero-copy">Consultoria especializada em governança, gestão de riscos, Segurança da Informação e resiliência organizacional.</p>
+      <p class="hero-copy">Consultoria especializada em estruturar, avaliar e evoluir capacidades de Segurança da Informação com base em riscos, governança e objetivos organizacionais.</p>
       <div class="actions">
         <a class="button button-primary" href="#servicos">Conheça os serviços</a>
         <a class="button button-secondary" href="#contato">Fale com a FN Consulting</a>
       </div>
     </div>
+
     <div class="visual" aria-hidden="true">
-      <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="mesh"></div>
-      <div class="signal">Governança <span>→</span> Riscos <span>→</span> Estratégia</div>
+      <div class="visual-label">Visão integrada</div>
+      <div class="axis axis-a"></div>
+      <div class="axis axis-b"></div>
+      <div class="node node-a"><span>01</span><strong>Contexto</strong></div>
+      <div class="node node-b"><span>02</span><strong>Risco</strong></div>
+      <div class="node node-c"><span>03</span><strong>Decisão</strong></div>
+      <div class="node node-d"><span>04</span><strong>Evolução</strong></div>
+      <div class="core"><span>FN</span></div>
+      <div class="signal">Governança <span>→</span> Segurança <span>→</span> Estratégia</div>
     </div>
   </div>
 </section>
 
 <style>
-  .hero { background: var(--navy-950); color: white; padding: 7rem 0 6rem; overflow: hidden; }
-  .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 4rem; align-items: center; }
+  .hero { position: relative; background: var(--navy-950); color: white; padding: 8rem 0 7rem; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 72% 28%, rgba(23,105,224,.16), transparent 28%), radial-gradient(circle at 86% 74%, rgba(26,167,161,.10), transparent 24%); pointer-events: none; }
+  .hero-grid { position: relative; display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(3rem, 6vw, 6.5rem); align-items: center; }
   .hero .eyebrow { color: #7dd3fc; }
-  .hero h1 { color: white; }
-  .hero-copy { color: #cbd5e1; font-size: clamp(1.1rem, 2vw, 1.35rem); max-width: 58ch; }
-  .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
-  .visual { position: relative; min-height: 360px; border: 1px solid rgba(255,255,255,.12); border-radius: 32px; background: linear-gradient(145deg, rgba(23,105,224,.18), rgba(26,167,161,.08)); overflow: hidden; box-shadow: inset 0 0 60px rgba(255,255,255,.03); }
-  .mesh { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom, black, transparent); }
-  .orb { position: absolute; border-radius: 999px; filter: blur(3px); }
-  .orb-a { width: 170px; height: 170px; top: 55px; left: 70px; background: rgba(23,105,224,.55); }
-  .orb-b { width: 130px; height: 130px; right: 55px; bottom: 65px; background: rgba(26,167,161,.5); }
-  .signal { position: absolute; left: 1.4rem; right: 1.4rem; bottom: 1.4rem; padding: 1rem 1.2rem; border-radius: 16px; background: rgba(7,17,31,.72); border: 1px solid rgba(255,255,255,.12); font-weight: 700; backdrop-filter: blur(12px); }
-  .signal span { color: #5eead4; margin: 0 .45rem; }
-  @media (max-width: 850px) { .hero { padding-top: 5rem; } .hero-grid { grid-template-columns: 1fr; } .visual { min-height: 260px; } }
+  .hero h1 { color: white; margin-bottom: 1.5rem; }
+  .positioning { margin: 0 0 1.6rem; color: #94a3b8; font-size: .88rem; font-weight: 700; letter-spacing: .04em; }
+  .hero-copy { color: #cbd5e1; font-size: clamp(1.1rem, 1.8vw, 1.32rem); max-width: 58ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.3rem; }
+  .visual { position: relative; min-height: 430px; border: 1px solid rgba(255,255,255,.11); border-radius: var(--radius-xl); background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(19,36,61,.48)); overflow: hidden; box-shadow: var(--shadow-dark); }
+  .visual::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 48px 48px; mask-image: linear-gradient(to bottom, black, transparent 92%); }
+  .visual-label { position: absolute; top: 1.5rem; left: 1.5rem; color: #94a3b8; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+  .axis { position: absolute; background: linear-gradient(90deg, transparent, rgba(125,211,252,.26), transparent); height: 1px; width: 68%; left: 16%; top: 48%; }
+  .axis-b { transform: rotate(90deg); }
+  .core { position: absolute; width: 92px; height: 92px; border-radius: 50%; left: 50%; top: 48%; transform: translate(-50%,-50%); display: grid; place-items: center; border: 1px solid rgba(125,211,252,.35); background: rgba(7,17,31,.88); box-shadow: 0 0 0 18px rgba(23,105,224,.05), 0 0 70px rgba(23,105,224,.18); }
+  .core span { font-size: 1.65rem; font-weight: 900; letter-spacing: -.08em; }
+  .node { position: absolute; min-width: 104px; padding: .7rem .8rem; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: rgba(7,17,31,.72); backdrop-filter: blur(10px); }
+  .node span { display: block; color: #5eead4; font-size: .65rem; font-weight: 900; letter-spacing: .12em; }
+  .node strong { display: block; margin-top: .18rem; color: white; font-size: .84rem; }
+  .node-a { left: 8%; top: 24%; }
+  .node-b { right: 8%; top: 24%; }
+  .node-c { left: 8%; bottom: 24%; }
+  .node-d { right: 8%; bottom: 24%; }
+  .signal { position: absolute; left: 1.4rem; right: 1.4rem; bottom: 1.4rem; padding: .95rem 1.1rem; border-radius: 14px; background: rgba(7,17,31,.80); border: 1px solid rgba(255,255,255,.10); color: #dbeafe; font-size: .84rem; font-weight: 750; backdrop-filter: blur(12px); }
+  .signal span { color: #5eead4; margin: 0 .42rem; }
+  @media (max-width: 900px) { .hero { padding: 6rem 0 5.5rem; } .hero-grid { grid-template-columns: 1fr; } .visual { min-height: 360px; } }
+  @media (max-width: 520px) { .visual { min-height: 320px; } .node { min-width: 88px; padding: .55rem .65rem; } .node strong { font-size: .75rem; } .signal { font-size: .73rem; } }
 </style>
