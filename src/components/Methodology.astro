@@ -1,0 +1,55 @@
+---
+const methods = [
+  ['Entender', 'Compreender contexto, objetivos, riscos, processos e prioridades.'],
+  ['Avaliar', 'Analisar o cenário atual com base em evidências, normas e frameworks.'],
+  ['Priorizar', 'Ordenar lacunas e iniciativas considerando risco, impacto e capacidade.'],
+  ['Estruturar', 'Definir processos, controles, responsabilidades, indicadores e iniciativas.'],
+  ['Evoluir', 'Mensurar resultados e sustentar ciclos de revisão e melhoria contínua.']
+];
+const references = ['ISO/IEC 27001', 'ISO/IEC 27002', 'ISO/IEC 27005', 'ISO/IEC 27701', 'ISO 22301', 'ISO 31000', 'NIST CSF 2.0', 'NIST RMF'];
+---
+<section id="metodologia" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow">Metodologia</p>
+      <h2>Da compreensão do cenário à evolução.</h2>
+    </div>
+    <div class="grid grid-3 method-grid">
+      {methods.map(([title, text], index) => (
+        <article class="method">
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section id="referencias" class="section references">
+  <div class="container reference-grid">
+    <div>
+      <p class="eyebrow">Referências</p>
+      <h2>Frameworks como instrumentos de gestão, não como fim.</h2>
+      <p class="lead">A FN Consulting utiliza normas e frameworks reconhecidos internacionalmente para estruturar avaliações, decisões e modelos de gestão adequados ao contexto de cada organização.</p>
+    </div>
+    <div class="tags" aria-label="Normas e frameworks utilizados">
+      {references.map((reference) => <span>{reference}</span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .method-grid { grid-template-columns: repeat(5, 1fr); }
+  .method { padding-top: 1.2rem; border-top: 2px solid var(--navy-950); }
+  .method span { color: var(--blue-600); font-size: .75rem; font-weight: 900; }
+  .method h3 { margin: 1.8rem 0 .5rem; }
+  .references { background: var(--navy-950); color: white; }
+  .references h2 { color: white; }
+  .references .lead { color: #cbd5e1; }
+  .reference-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center; }
+  .tags { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .tags span { padding: .75rem 1rem; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: #e2e8f0; background: rgba(255,255,255,.04); }
+  @media (max-width: 900px) { .method-grid { grid-template-columns: repeat(2,1fr); } .reference-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .method-grid { grid-template-columns: 1fr; } }
+</style>
