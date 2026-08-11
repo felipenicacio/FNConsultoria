@@ -48,7 +48,8 @@ export interface Service {
   references?: string[];
   /**
    * Slugs de serviços relacionados.
-   * Definitivos após FEL-24.
+   * Reflete a baseline vigente da arquitetura registrada no Notion
+   * e pode evoluir enquanto a FEL-24 permanecer aberta.
    */
   relatedSlugs?: string[];
   /**
