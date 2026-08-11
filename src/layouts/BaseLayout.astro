@@ -30,13 +30,14 @@ interface Props {
  *
  * O fallback abaixo é intencional — sinaliza que o domínio ainda não foi
  * aprovado. Não o substitua por um domínio fixo antes da Fase 7.
+ * Domínio planejado para produção: https://www.fnsecurity.com.br (FEL-32/FEL-36)
  */
 const SITE_URL =
   import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||
-  'https://placeholder.fnconsulting.com.br';
+  'https://placeholder.fnsecurity.com.br';
 
 const {
-  title = 'FN Consulting | Segurança da Informação e Gestão de Riscos',
+  title = 'FN Security | Segurança da Informação e Gestão de Riscos',
   description = 'Consultoria especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade. Apoiamos organizações a transformar riscos em decisões e planos estruturados de evolução.',
   canonicalPath = '',
   ogImage,
@@ -50,7 +51,7 @@ const canonicalURL =
 const defaultStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'FN Consulting',
+  name: 'FN Security',
   url: SITE_URL,
   description,
   knowsAbout: [
@@ -92,7 +93,7 @@ const ogImageURL = ogImage ? `${SITE_URL}${ogImage}` : undefined;
     {!noindex && (
       <>
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="FN Consulting" />
+        <meta property="og:site_name" content="FN Security" />
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
