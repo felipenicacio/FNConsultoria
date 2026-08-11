@@ -1,5 +1,5 @@
 /**
- * Catálogo de serviços da FN Consulting.
+ * Catálogo de serviços da FN Security.
  *
  * GOVERNANÇA DE DADOS
  * ─────────────────────────────────────────────────────────────────────────
