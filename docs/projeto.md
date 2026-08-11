@@ -1,5 +1,7 @@
 # Projeto FN Consulting — Site Institucional
 
+> **Nota de transição (FEL-29):** a marca comercial foi atualizada de **FN Consulting** para **FN Security** (nome empresarial: FN Privacy Security). Este documento é preservado como **registro histórico** das decisões e requisitos originais do projeto. As referências a "FN Consulting" abaixo refletem a marca vigente à época da criação deste documento e não representam a nomenclatura atual.
+
 ## 1. Visão Geral
 
 O projeto tem como objetivo criar o site institucional da **FN Consulting**, consultoria especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade.
