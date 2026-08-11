@@ -1,0 +1,145 @@
+---
+/**
+ * Corpo da página de serviço.
+ *
+ * CONTEÚDO DEFINITIVO PENDENTE
+ * ─────────────────────────────────────────────────────────────────────────
+ * As seções de escopo, abordagem, etapas, entregáveis e CTA específico
+ * serão adicionadas após conclusão das issues FEL-19 a FEL-28 no Linear.
+ * Este componente exibe as referências metodológicas (disponíveis) e
+ * um CTA genérico enquanto o conteúdo detalhado não está aprovado.
+ */
+import type { Service } from '../data/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<div class="service-body">
+
+  {service.references && service.references.length > 0 && (
+    <section class="references-section section" aria-labelledby="referencias-title">
+      <div class="container">
+        <p class="eyebrow">Referências metodológicas</p>
+        <h2 id="referencias-title">Frameworks e normas utilizados</h2>
+        <p class="lead">
+          A atuação da FN Consulting utiliza normas e frameworks reconhecidos
+          internacionalmente como instrumentos de estruturação e referência,
+          e não como fins em si mesmos.
+        </p>
+        <ul class="ref-tags" aria-label="Normas e frameworks deste serviço">
+          {service.references.map((ref) => (
+            <li><span>{ref}</span></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="cta-section section">
+    <div class="container">
+      <div class="cta-box">
+        <div class="cta-content">
+          <p class="eyebrow">Próximo passo</p>
+          <h2>Quer entender como este serviço se aplica à sua organização?</h2>
+          <p class="lead">
+            Uma conversa inicial ajuda a definir contexto, necessidade e
+            abordagem mais adequada para a sua realidade.
+          </p>
+        </div>
+        <div class="cta-action">
+          <a
+            class="button button-primary"
+            href="https://www.linkedin.com/in/felipe-nicacio/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Fale pelo LinkedIn
+            <span class="sr-only"> (abre em nova aba)</span>
+          </a>
+          <a class="back-link" href="/#servicos">
+            <span aria-hidden="true">←</span> Ver todos os serviços
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  .references-section { background: var(--slate-100); }
+  .references-section h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+
+  .ref-tags {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+  }
+  .ref-tags li span {
+    display: inline-block;
+    padding: .72rem .95rem;
+    border: 1px solid var(--slate-200);
+    border-radius: 999px;
+    color: var(--navy-900);
+    background: var(--white);
+    font-size: .86rem;
+    font-weight: 700;
+  }
+
+  .cta-section { background: var(--white); }
+
+  .cta-box {
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+    gap: 4rem;
+    align-items: center;
+    padding: clamp(2.5rem, 5vw, 4rem);
+    border-radius: var(--radius-xl);
+    background: var(--navy-950);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-box::before {
+    content: "";
+    position: absolute;
+    width: 320px; height: 320px;
+    right: -100px; bottom: -160px;
+    border: 1px solid rgba(125,211,252,.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 60px rgba(23,105,224,.025);
+  }
+
+  .cta-content, .cta-action { position: relative; z-index: 1; }
+  .cta-box .eyebrow { color: #7dd3fc; }
+  .cta-box h2 { color: white; font-size: clamp(1.6rem, 3vw, 2.5rem); max-width: 22ch; }
+  .cta-box .lead { color: #cbd5e1; }
+
+  .cta-action {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .back-link {
+    color: #94a3b8;
+    font-size: .88rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    transition: color .2s ease;
+  }
+  .back-link:hover { color: white; }
+
+  @media (max-width: 760px) {
+    .cta-box { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
