@@ -8,16 +8,22 @@ const steps = [
   ['Evoluir', 'Melhoria contínua']
 ];
 ---
-<section class="section section-soft" aria-labelledby="jornada-title">
+<section class="section journey-section" aria-labelledby="jornada-title">
   <div class="container">
-    <div class="section-header">
-      <p class="eyebrow">Jornada</p>
-      <h2 id="jornada-title">Uma evolução integrada em Segurança da Informação.</h2>
+    <div class="section-header journey-header">
+      <div>
+        <p class="eyebrow">Jornada</p>
+        <h2 id="jornada-title">Uma evolução integrada em Segurança da Informação.</h2>
+      </div>
+      <p class="lead">Os serviços se conectam como etapas de uma mesma capacidade de gestão: compreender o cenário, priorizar decisões, estruturar controles e sustentar evolução.</p>
     </div>
     <ol class="journey">
       {steps.map(([step, service], index) => (
         <li>
-          <span class="index">{String(index + 1).padStart(2, '0')}</span>
+          <div class="step-top">
+            <span class="index">{String(index + 1).padStart(2, '0')}</span>
+            {index < steps.length - 1 && <span class="connector" aria-hidden="true">→</span>}
+          </div>
           <strong>{step}</strong>
           <small>{service}</small>
         </li>
@@ -27,12 +33,17 @@ const steps = [
 </section>
 
 <style>
-  .journey { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); overflow: hidden; background: white; }
-  li { padding: 1.4rem; min-height: 180px; display: flex; flex-direction: column; border-right: 1px solid var(--slate-200); }
-  li:last-child { border-right: 0; }
-  .index { color: var(--blue-600); font-size: .75rem; font-weight: 900; }
-  strong { margin-top: auto; font-size: 1rem; }
-  small { margin-top: .35rem; color: var(--slate-500); line-height: 1.35; }
-  @media (max-width: 950px) { .journey { grid-template-columns: repeat(2, 1fr); } li { border-bottom: 1px solid var(--slate-200); } }
-  @media (max-width: 520px) { .journey { grid-template-columns: 1fr; } li { min-height: 135px; border-right: 0; } }
+  .journey-section { background: var(--white); }
+  .journey-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
+  .journey-header .lead { margin: 0; }
+  .journey { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200); }
+  li { position: relative; padding: 1.7rem 1.15rem 1.8rem 0; min-height: 190px; display: flex; flex-direction: column; }
+  li:not(:last-child) { border-right: 1px solid var(--slate-200); margin-right: 1.15rem; }
+  .step-top { display: flex; justify-content: space-between; align-items: center; min-height: 22px; }
+  .index { color: var(--blue-600); font-size: .72rem; font-weight: 900; letter-spacing: .12em; }
+  .connector { margin-right: -.45rem; color: var(--teal-500); font-weight: 900; }
+  strong { margin-top: auto; color: var(--navy-950); font-size: 1.02rem; line-height: 1.25; }
+  small { margin-top: .42rem; color: var(--slate-500); line-height: 1.4; }
+  @media (max-width: 950px) { .journey-header { grid-template-columns: 1fr; gap: 1.4rem; } .journey { grid-template-columns: repeat(2, 1fr); border-bottom: 0; } li { border-bottom: 1px solid var(--slate-200); } }
+  @media (max-width: 520px) { .journey { grid-template-columns: 1fr; } li { min-height: 145px; border-right: 0 !important; margin-right: 0 !important; padding-right: 0; } .connector { display: none; } }
 </style>
