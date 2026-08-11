@@ -1,31 +1,38 @@
 <footer class="footer">
   <div class="container footer-grid">
-    <div>
-      <strong>FN Consulting</strong>
+    <div class="footer-brand">
+      <a class="brand" href="#inicio" aria-label="FN Consulting - Início"><strong>FN</strong><span>Consulting</span></a>
       <p>Segurança da Informação · Governança · Gestão de Riscos · Continuidade de Negócios · Privacidade</p>
-      <small>Felipe Nicácio</small>
+      <small>Felipe Nicácio · Consultor responsável</small>
     </div>
     <nav aria-label="Navegação do rodapé">
       <a href="#servicos">Serviços</a>
       <a href="#metodologia">Metodologia</a>
+      <a href="#referencias">Referências</a>
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
     </nav>
   </div>
   <div class="container legal">
     <small>As informações apresentadas possuem caráter institucional e informativo e não representam garantia de certificação, conformidade integral ou eliminação de riscos.</small>
+    <span aria-hidden="true"></span>
+    <small>FN Consulting</small>
   </div>
 </footer>
 
 <style>
-  .footer { padding: 3.5rem 0 2rem; background: var(--navy-950); color: white; }
-  .footer-grid { display: flex; justify-content: space-between; gap: 3rem; }
-  strong { font-size: 1.2rem; }
-  p, small { color: #94a3b8; }
-  p { max-width: 58ch; }
-  nav { display: flex; gap: 1rem; flex-wrap: wrap; align-content: flex-start; }
+  .footer { padding: 4rem 0 2rem; background: var(--navy-950); color: white; }
+  .footer-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 4rem; align-items: start; }
+  .brand { display: inline-flex; align-items: baseline; gap: .45rem; letter-spacing: -.04em; }
+  .brand strong { color: white; font-size: 1.45rem; font-weight: 900; }
+  .brand span { color: #94a3b8; font-size: 1.05rem; font-weight: 650; letter-spacing: -.02em; }
+  .footer-brand p, .footer-brand small { color: #94a3b8; }
+  .footer-brand p { max-width: 62ch; margin: 1.1rem 0 .45rem; }
+  nav { display: flex; justify-content: flex-end; gap: 1.15rem; flex-wrap: wrap; align-content: flex-start; font-size: .88rem; font-weight: 700; }
   nav a { color: #cbd5e1; }
   nav a:hover { color: white; }
-  .legal { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1); }
-  @media (max-width: 700px) { .footer-grid { flex-direction: column; } }
+  .legal { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; gap: 1rem; color: #64748b; }
+  .legal small:first-child { max-width: 76ch; }
+  .legal span { flex: 1; height: 1px; background: rgba(255,255,255,.08); }
+  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } nav { justify-content: flex-start; } .legal { align-items: flex-start; flex-direction: column; } .legal span { display: none; } }
 </style>
