@@ -1,0 +1,24 @@
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#inicio" aria-label="FN Consulting - Início">FN <span>Consulting</span></a>
+    <nav aria-label="Navegação principal">
+      <a href="#servicos">Serviços</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#referencias">Referências</a>
+      <a href="#sobre">Sobre</a>
+      <a class="nav-cta" href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(226,232,240,.8); }
+  .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .brand { font-weight: 900; letter-spacing: -.04em; font-size: 1.25rem; }
+  .brand span { font-weight: 600; color: var(--slate-500); }
+  nav { display: flex; align-items: center; gap: 1.3rem; font-size: .94rem; font-weight: 650; }
+  nav a:hover { color: var(--blue-600); }
+  .nav-cta { padding: .55rem .9rem; border-radius: 999px; background: var(--navy-950); color: white; }
+  .nav-cta:hover { color: white; background: var(--blue-600); }
+  @media (max-width: 760px) { nav a:not(.nav-cta) { display: none; } }
+</style>
