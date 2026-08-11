@@ -10,20 +10,47 @@ const {
   title = 'FN Consulting | Segurança da Informação e Gestão de Riscos',
   description = 'Consultoria em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade.'
 } = Astro.props;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'FN Consulting',
+  description,
+  knowsAbout: [
+    'Segurança da Informação',
+    'Governança de Segurança da Informação',
+    'Gestão de Riscos Cibernéticos',
+    'ISO/IEC 27001',
+    'NIST Cybersecurity Framework 2.0',
+    'Continuidade de Negócios',
+    'Privacidade de Dados'
+  ],
+  founder: {
+    '@type': 'Person',
+    name: 'Felipe Nicácio',
+    jobTitle: 'Consultor responsável',
+    sameAs: ['https://www.linkedin.com/in/felipe-nicacio/']
+  }
+};
 ---
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#07111f" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FN Consulting" />
+    <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   </head>
   <body>
     <slot />
