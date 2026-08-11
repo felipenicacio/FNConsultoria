@@ -1,13 +1,47 @@
 ---
-const steps = [
-  ['Avaliar', 'Assessment NIST CSF 2.0'],
-  ['Planejar', 'PESI'],
-  ['Governar', 'CISO como Serviço'],
-  ['Implementar', 'SGSI ISO/IEC 27001'],
-  ['Desenvolver cultura', 'Conscientização'],
-  ['Evoluir', 'Melhoria contínua']
-];
+/**
+ * Jornada de atuação — Home.
+ *
+ * As etapas são conceituais e aprovadas na Fase 1.
+ * Os nomes de serviço associados a cada etapa são referências informativas
+ * baseadas na FEL-18 e não constituem hierarquia comercial definitiva
+ * (essa definição ocorre na FEL-24).
+ */
+
+const journey = [
+  {
+    step: 'Avaliar',
+    description: 'Compreender o cenário atual, identificar lacunas e definir prioridades.',
+    services: ['Assessment NIST CSF 2.0', 'Auditoria e Readiness'],
+  },
+  {
+    step: 'Planejar',
+    description: 'Transformar contexto e riscos em objetivos, iniciativas e roadmap.',
+    services: ['PESI'],
+  },
+  {
+    step: 'Governar',
+    description: 'Estruturar responsabilidades, indicadores e acompanhamento executivo.',
+    services: ['CISO como Serviço'],
+  },
+  {
+    step: 'Implementar',
+    description: 'Estruturar sistemas de gestão, controles e capacidades de segurança.',
+    services: ['SGSI ISO/IEC 27001'],
+  },
+  {
+    step: 'Desenvolver cultura',
+    description: 'Construir comportamentos, percepção de risco e capacidade das pessoas.',
+    services: ['Programa de Conscientização'],
+  },
+  {
+    step: 'Evoluir',
+    description: 'Sustentar ciclos de revisão, melhoria contínua e gestão de riscos.',
+    services: ['Gestão contínua'],
+  },
+] as const;
 ---
+
 <section class="section journey-section" aria-labelledby="jornada-title">
   <div class="container">
     <div class="section-header journey-header">
@@ -15,17 +49,28 @@ const steps = [
         <p class="eyebrow">Jornada</p>
         <h2 id="jornada-title">Uma evolução integrada em Segurança da Informação.</h2>
       </div>
-      <p class="lead">Os serviços se conectam como etapas de uma mesma capacidade de gestão: compreender o cenário, priorizar decisões, estruturar controles e sustentar evolução.</p>
+      <p class="lead">
+        Os serviços se conectam como etapas de uma mesma capacidade de gestão:
+        compreender o cenário, priorizar decisões, estruturar controles e sustentar evolução.
+      </p>
     </div>
-    <ol class="journey">
-      {steps.map(([step, service], index) => (
+
+    <ol class="journey" aria-label="Etapas da jornada de Segurança da Informação">
+      {journey.map(({ step, description, services }, index) => (
         <li>
           <div class="step-top">
-            <span class="index">{String(index + 1).padStart(2, '0')}</span>
-            {index < steps.length - 1 && <span class="connector" aria-hidden="true">→</span>}
+            <span class="index" aria-label={`Etapa ${index + 1}`}>
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            {index < journey.length - 1 && (
+              <span class="connector" aria-hidden="true">→</span>
+            )}
           </div>
-          <strong>{step}</strong>
-          <small>{service}</small>
+          <strong class="step-name">{step}</strong>
+          <p class="step-desc">{description}</p>
+          <ul class="step-services" aria-label={`Serviços associados: ${step}`}>
+            {services.map((s) => <li>{s}</li>)}
+          </ul>
         </li>
       ))}
     </ol>
@@ -34,16 +79,78 @@ const steps = [
 
 <style>
   .journey-section { background: var(--white); }
-  .journey-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
+
+  .journey-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
   .journey-header .lead { margin: 0; }
-  .journey { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200); }
-  li { position: relative; padding: 1.7rem 1.15rem 1.8rem 0; min-height: 190px; display: flex; flex-direction: column; }
-  li:not(:last-child) { border-right: 1px solid var(--slate-200); margin-right: 1.15rem; }
-  .step-top { display: flex; justify-content: space-between; align-items: center; min-height: 22px; }
+
+  .journey {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1px solid var(--slate-200);
+    border-bottom: 1px solid var(--slate-200);
+  }
+
+  li {
+    position: relative;
+    padding: 1.7rem 1.15rem 1.8rem 0;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+  }
+  li:not(:last-child) {
+    border-right: 1px solid var(--slate-200);
+    margin-right: 1.15rem;
+  }
+
+  .step-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 22px;
+  }
   .index { color: var(--blue-600); font-size: .72rem; font-weight: 900; letter-spacing: .12em; }
   .connector { margin-right: -.45rem; color: var(--teal-500); font-weight: 900; }
-  strong { margin-top: auto; color: var(--navy-950); font-size: 1.02rem; line-height: 1.25; }
-  small { margin-top: .42rem; color: var(--slate-500); line-height: 1.4; }
-  @media (max-width: 950px) { .journey-header { grid-template-columns: 1fr; gap: 1.4rem; } .journey { grid-template-columns: repeat(2, 1fr); border-bottom: 0; } li { border-bottom: 1px solid var(--slate-200); } }
-  @media (max-width: 520px) { .journey { grid-template-columns: 1fr; } li { min-height: 145px; border-right: 0 !important; margin-right: 0 !important; padding-right: 0; } .connector { display: none; } }
+
+  .step-name { margin-top: auto; color: var(--navy-950); font-size: 1rem; line-height: 1.25; }
+  .step-desc { margin: 0; color: var(--slate-500); font-size: .82rem; line-height: 1.45; }
+
+  .step-services {
+    list-style: none;
+    padding: 0;
+    margin: .3rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+  }
+  .step-services li {
+    min-height: 0;
+    padding: 0;
+    border: none;
+    margin: 0;
+    color: var(--teal-500);
+    font-size: .72rem;
+    font-weight: 750;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 950px) {
+    .journey-header { grid-template-columns: 1fr; gap: 1.4rem; }
+    .journey { grid-template-columns: repeat(2, 1fr); border-bottom: 0; }
+    li:not(:last-child) { border-right: 0; margin-right: 0; padding-right: 0; }
+    li { border-bottom: 1px solid var(--slate-200); min-height: 170px; }
+  }
+  @media (max-width: 520px) {
+    .journey { grid-template-columns: 1fr; }
+    li { min-height: 140px; }
+    .connector { display: none; }
+  }
 </style>

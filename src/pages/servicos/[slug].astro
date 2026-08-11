@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceBody from '../../components/ServiceBody.astro';
+import ServiceRelated from '../../components/ServiceRelated.astro';
+import { getAllServiceSlugs, getServiceBySlug } from '../../data/services';
+
+export function getStaticPaths() {
+  return getAllServiceSlugs().map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const service = getServiceBySlug(slug);
+
+if (!service) {
+  return Astro.redirect('/');
+}
+
+const related = (service.relatedSlugs ?? [])
+  .map((s) => getServiceBySlug(s))
+  .filter((s): s is NonNullable<typeof s> => s !== undefined);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.title,
+  description: service.description,
+  provider: {
+    '@type': 'ProfessionalService',
+    name: 'FN Consulting',
+    founder: {
+      '@type': 'Person',
+      name: 'Felipe Nicácio',
+      sameAs: ['https://www.linkedin.com/in/felipe-nicacio/'],
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={`${service.shortTitle} | FN Consulting`}
+  description={service.description}
+  canonicalPath={`/servicos/${service.slug}`}
+  structuredData={structuredData}
+  noindex={!service.seoReady}
+>
+  <Header />
+  <main id="conteudo-principal">
+    <ServiceHero service={service} />
+    <ServiceBody service={service} />
+    {related.length > 0 && <ServiceRelated services={related} />}
+  </main>
+  <Footer />
+</BaseLayout>

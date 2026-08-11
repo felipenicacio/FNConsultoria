@@ -4,17 +4,54 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  /** Caminho relativo para canonical URL, ex: '/servicos/ciso-como-servico' */
+  canonicalPath?: string;
+  /** Dados estruturados Schema.org específicos da página (sobrescreve o padrão) */
+  structuredData?: Record<string, unknown>;
+  /** URL relativa de imagem para Open Graph, ex: '/og/home.png' */
+  ogImage?: string;
+  /**
+   * Quando true, emite <meta name="robots" content="noindex, nofollow">
+   * e omite canonical, OG e link para sitemap.
+   * Usar em: páginas 404, páginas de serviço com seoReady: false.
+   */
+  noindex?: boolean;
 }
+
+/**
+ * Domínio do site.
+ *
+ * Em desenvolvimento ou enquanto o domínio definitivo não estiver aprovado
+ * (Fase 7 — QA e Publicação V1), define PUBLIC_SITE_URL na variável de
+ * ambiente para sobrescrever o placeholder.
+ *
+ * Cloudflare Pages: Settings → Environment variables → PUBLIC_SITE_URL
+ * Desenvolvimento local: .env → PUBLIC_SITE_URL=http://localhost:4321
+ *
+ * O fallback abaixo é intencional — sinaliza que o domínio ainda não foi
+ * aprovado. Não o substitua por um domínio fixo antes da Fase 7.
+ */
+const SITE_URL =
+  import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||
+  'https://placeholder.fnconsulting.com.br';
 
 const {
   title = 'FN Consulting | Segurança da Informação e Gestão de Riscos',
-  description = 'Consultoria em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade.'
+  description = 'Consultoria especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade. Apoiamos organizações a transformar riscos em decisões e planos estruturados de evolução.',
+  canonicalPath = '',
+  ogImage,
+  structuredData,
+  noindex = false,
 } = Astro.props;
 
-const structuredData = {
+const canonicalURL =
+  `${SITE_URL}${canonicalPath || Astro.url.pathname}`.replace(/\/$/, '') || SITE_URL;
+
+const defaultStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: 'FN Consulting',
+  url: SITE_URL,
   description,
   knowsAbout: [
     'Segurança da Informação',
@@ -23,16 +60,21 @@ const structuredData = {
     'ISO/IEC 27001',
     'NIST Cybersecurity Framework 2.0',
     'Continuidade de Negócios',
-    'Privacidade de Dados'
+    'Privacidade de Dados',
+    'LGPD',
   ],
   founder: {
     '@type': 'Person',
     name: 'Felipe Nicácio',
     jobTitle: 'Consultor responsável',
-    sameAs: ['https://www.linkedin.com/in/felipe-nicacio/']
-  }
+    sameAs: ['https://www.linkedin.com/in/felipe-nicacio/'],
+  },
 };
+
+const ldJson = structuredData ?? defaultStructuredData;
+const ogImageURL = ogImage ? `${SITE_URL}${ogImage}` : undefined;
 ---
+
 <!doctype html>
 <html lang="pt-BR">
   <head>
@@ -40,19 +82,59 @@ const structuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#07111f" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="FN Consulting" />
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    {noindex
+      ? <meta name="robots" content="noindex, nofollow" />
+      : <meta name="robots" content="index, follow" />
+    }
+
+    {!noindex && <link rel="canonical" href={canonicalURL} />}
+
+    {!noindex && (
+      <>
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="FN Consulting" />
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalURL} />
+        {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+      </>
+    )}
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {!noindex && <link rel="sitemap" href="/sitemap-index.xml" />}
+
     <title>{title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
+
+    <script type="application/ld+json" set:html={JSON.stringify(ldJson)} is:inline />
   </head>
   <body>
+    <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo principal</a>
     <slot />
   </body>
 </html>
+
+<style is:global>
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    padding: .75rem 1.25rem;
+    border-radius: 8px;
+    background: var(--navy-950);
+    color: white;
+    font-weight: 700;
+    font-size: .9rem;
+    text-decoration: none;
+    transition: top .15s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+</style>

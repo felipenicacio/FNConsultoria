@@ -1,0 +1,186 @@
+---
+import type { Service } from '../data/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const layerLabel: Record<Service['layer'], string> = {
+  primary: 'Serviço principal',
+  complementary: 'Serviço especializado',
+  transversal: 'Capacidade transversal',
+};
+---
+
+<section class="service-hero" aria-labelledby="service-title">
+  <div class="container service-hero-inner">
+
+    <nav class="breadcrumb" aria-label="Navegação estrutural">
+      <a href="/">FN Consulting</a>
+      <span aria-hidden="true">›</span>
+      <a href="/#servicos">Serviços</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{service.shortTitle}</span>
+    </nav>
+
+    <div class="service-hero-grid">
+      <div class="service-hero-content">
+        <p class="eyebrow">
+          <span class="layer-badge">{layerLabel[service.layer]}</span>
+        </p>
+        <h1 id="service-title">{service.title}</h1>
+        <p class="service-lead">{service.description}</p>
+
+        <div class="outcome-box" aria-label="Resultado esperado">
+          <span class="outcome-label">Resultado esperado</span>
+          <p class="outcome-text">{service.outcome}</p>
+        </div>
+      </div>
+
+      <div class="service-hero-side">
+        <div class="info-box">
+          <span class="box-label">Problema que este serviço resolve</span>
+          <p>{service.problem}</p>
+        </div>
+
+        {service.whenToHire && service.whenToHire.length > 0 && (
+          <div class="info-box">
+            <span class="box-label">Quando contratar</span>
+            <ul>
+              {service.whenToHire.map((when) => <li>{when}</li>)}
+            </ul>
+          </div>
+        )}
+
+        <a
+          class="button button-primary cta-btn"
+          href="/#contato"
+        >
+          Fale com a FN Consulting
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-hero {
+    background: var(--navy-950);
+    color: white;
+    padding: 4.5rem 0 5.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(23,105,224,.14), transparent 32%),
+      radial-gradient(circle at 10% 80%, rgba(26,167,161,.08), transparent 28%);
+    pointer-events: none;
+  }
+
+  .service-hero-inner { position: relative; }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 2.5rem;
+    font-size: .8rem;
+    font-weight: 650;
+  }
+  .breadcrumb a { color: #64748b; transition: color .2s ease; }
+  .breadcrumb a:hover { color: white; }
+  .breadcrumb [aria-current="page"] { color: #94a3b8; }
+  .breadcrumb span[aria-hidden] { color: #334155; }
+
+  .service-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .layer-badge {
+    display: inline-block;
+    padding: .28rem .7rem;
+    border: 1px solid rgba(125,211,252,.3);
+    border-radius: 999px;
+    color: #7dd3fc;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    color: white;
+    font-size: clamp(2rem, 4.5vw, 3.6rem);
+    max-width: 22ch;
+    margin: 1rem 0 1.5rem;
+    line-height: 1.1;
+  }
+
+  .service-lead {
+    color: #cbd5e1;
+    font-size: clamp(1rem, 1.8vw, 1.22rem);
+    max-width: 56ch;
+    line-height: 1.65;
+  }
+
+  .outcome-box {
+    margin-top: 2rem;
+    padding: 1.3rem 1.5rem;
+    border: 1px solid rgba(94,234,212,.22);
+    border-radius: var(--radius-md);
+    background: rgba(26,167,161,.07);
+    max-width: 52ch;
+  }
+  .outcome-label {
+    display: block;
+    color: #5eead4;
+    font-size: .67rem;
+    font-weight: 850;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: .55rem;
+  }
+  .outcome-text { margin: 0; color: white; font-weight: 750; line-height: 1.5; }
+
+  .service-hero-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .info-box {
+    padding: 1.25rem 1.4rem;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: var(--radius-md);
+    background: rgba(255,255,255,.04);
+  }
+  .box-label {
+    display: block;
+    color: #94a3b8;
+    font-size: .67rem;
+    font-weight: 850;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: .65rem;
+  }
+  .info-box p { margin: 0; color: #e2e8f0; font-size: .92rem; line-height: 1.55; }
+  .info-box ul { margin: 0; padding: 0 0 0 1.1rem; display: flex; flex-direction: column; gap: .35rem; }
+  .info-box li { color: #e2e8f0; font-size: .88rem; line-height: 1.5; }
+
+  .cta-btn { width: 100%; justify-content: center; margin-top: .25rem; }
+
+  @media (max-width: 860px) {
+    .service-hero { padding: 3.5rem 0 4.5rem; }
+    .service-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    h1 { font-size: clamp(1.9rem, 8vw, 3rem); }
+  }
+</style>
