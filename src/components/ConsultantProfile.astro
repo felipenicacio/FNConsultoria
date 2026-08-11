@@ -1,0 +1,20 @@
+<section id="sobre" class="section section-soft">
+  <div class="container profile-grid">
+    <div class="portrait" aria-hidden="true"><span>FN</span></div>
+    <div>
+      <p class="eyebrow">Sobre</p>
+      <h2>Felipe Nicácio</h2>
+      <p class="lead">Consultor responsável pela FN Consulting, especializado em Segurança da Informação, Continuidade de Negócios e Privacidade de Dados.</p>
+      <p>Atuação em governança, gestão de riscos, implementação de sistemas de gestão, assessments de maturidade e estruturação de programas de Segurança da Informação, utilizando referências como ISO/IEC 27001, ISO/IEC 27005, ISO/IEC 27701, ISO 22301, NIST CSF e NIST RMF.</p>
+      <a class="profile-link" href="https://www.linkedin.com/in/felipe-nicacio/" target="_blank" rel="noopener noreferrer">Conecte-se no LinkedIn →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .profile-grid { display: grid; grid-template-columns: .55fr 1.45fr; gap: 4rem; align-items: center; }
+  .portrait { aspect-ratio: 1; border-radius: 32px; display: grid; place-items: center; background: linear-gradient(145deg, var(--navy-950), var(--navy-800)); box-shadow: var(--shadow); }
+  .portrait span { color: white; font-size: clamp(3rem, 7vw, 6rem); font-weight: 900; letter-spacing: -.08em; }
+  .profile-link { display: inline-flex; margin-top: 1rem; color: var(--blue-600); font-weight: 800; }
+  @media (max-width: 760px) { .profile-grid { grid-template-columns: 1fr; } .portrait { max-width: 320px; } }
+</style>
