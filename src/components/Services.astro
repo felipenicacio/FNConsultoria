@@ -1,0 +1,35 @@
+---
+import { services } from '../data/services';
+---
+<section id="servicos" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow">Serviços</p>
+      <h2>Da avaliação do cenário atual à construção de capacidades sustentáveis.</h2>
+      <p class="lead">Serviços estruturados para apoiar decisões, organizar prioridades e desenvolver a Segurança da Informação como capacidade de gestão.</p>
+    </div>
+    <div class="services-grid">
+      {services.map((service, index) => (
+        <article class="card service-card">
+          <span class="number">0{index + 1}</span>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+          <p class="outcome">{service.outcome}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.25rem; }
+  .service-card { position: relative; min-height: 290px; display: flex; flex-direction: column; }
+  .service-card:first-child { grid-column: span 2; background: var(--navy-950); border-color: var(--navy-950); }
+  .service-card:first-child h3, .service-card:first-child .outcome { color: white; }
+  .service-card:first-child p:not(.outcome) { color: #cbd5e1; }
+  .number { color: var(--blue-600); font-weight: 900; font-size: .8rem; letter-spacing: .12em; }
+  h3 { margin-top: 2.2rem; font-size: 1.45rem; max-width: 28ch; }
+  .outcome { margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--slate-200); font-weight: 750; color: var(--navy-900); }
+  .service-card:first-child .outcome { border-color: rgba(255,255,255,.14); }
+  @media (max-width: 760px) { .services-grid { grid-template-columns: 1fr; } .service-card:first-child { grid-column: auto; } }
+</style>
