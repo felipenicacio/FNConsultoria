@@ -1,12 +1,12 @@
-# CLAUDE.md — FN Consulting
+# CLAUDE.md — FN Security
 
 Este arquivo define as instruções permanentes para qualquer trabalho realizado com Claude Code neste repositório.
 
-O objetivo é preservar coerência arquitetural, qualidade técnica, segurança, identidade visual e alinhamento com o propósito institucional da FN Consulting.
+O objetivo é preservar coerência arquitetural, qualidade técnica, segurança, identidade visual e alinhamento com o propósito institucional da FN Security.
 
 ## 1. Contexto do projeto
 
-Este repositório contém o site institucional da **FN Consulting**, consultoria especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade.
+Este repositório contém o site institucional da **FN Security**, consultoria especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade.
 
 **Consultor responsável:** Felipe Nicácio
 
@@ -38,7 +38,7 @@ Em caso de conflito entre uma solicitação pontual e a arquitetura documentada,
 
 Toda alteração deve responder positivamente a pelo menos uma destas perguntas:
 
-- melhora a comunicação institucional da FN Consulting?
+- melhora a comunicação institucional da FN Security?
 - melhora a experiência do usuário?
 - melhora a autoridade e credibilidade da marca?
 - melhora a geração de oportunidades comerciais?
@@ -139,7 +139,7 @@ Ao criar novos componentes:
 
 ## 7. Serviços institucionais
 
-Os cinco serviços iniciais da FN Consulting são:
+Os serviços da FN Security são:
 
 1. CISO como Serviço
 2. PESI — Plano Estratégico de Segurança da Informação
@@ -155,7 +155,7 @@ Não alterar essa lógica sem motivo explícito.
 
 ## 8. Posicionamento da marca
 
-A FN Consulting deve ser percebida como uma **consultoria boutique especializada**, e não como uma empresa genérica de TI.
+A FN Security deve ser percebida como uma **consultoria boutique especializada**, e não como uma empresa genérica de TI.
 
 A comunicação deve conectar:
 
@@ -246,7 +246,7 @@ O site deve ser simples de compreender e navegar.
 
 A hierarquia esperada deve permitir ao visitante identificar rapidamente:
 
-1. quem é a FN Consulting;
+1. quem é a FN Security;
 2. qual problema ela ajuda a resolver;
 3. quais serviços oferece;
 4. como trabalha;
@@ -364,7 +364,7 @@ Preservar ou implementar:
 
 Termos estratégicos incluem:
 
-- FN Consulting
+- FN Security
 - Consultoria em Segurança da Informação
 - CISO como Serviço
 - vCISO
@@ -391,7 +391,7 @@ Quando dados estruturados forem utilizados, priorizar:
 
 Relacionar:
 
-- FN Consulting como entidade institucional;
+- FN Security como entidade institucional;
 - Felipe Nicácio como profissional responsável.
 
 Não inserir dados estruturados fictícios.
@@ -457,7 +457,7 @@ Antes de adicionar dependência:
 
 Ao abrir links externos em nova aba, usar configurações de segurança apropriadas, incluindo `rel="noopener noreferrer"` quando aplicável.
 
-Não introduzir links externos desconhecidos ou não relacionados à FN Consulting.
+Não introduzir links externos desconhecidos ou não relacionados à FN Security.
 
 ## 21. Privacidade
 
@@ -531,7 +531,7 @@ Utilizar o nome completo:
 
 **Felipe Nicácio**
 
-Apresentá-lo como consultor responsável pela FN Consulting.
+Apresentá-lo como consultor responsável pela FN Security.
 
 Não inventar:
 
@@ -568,7 +568,7 @@ Não alterar sem necessidade clara:
 
 - stack principal;
 - arquitetura de geração estática;
-- identidade da marca FN Consulting;
+- identidade da marca FN Security;
 - nome Felipe Nicácio;
 - catálogo de serviços;
 - jornada conceitual dos serviços;
@@ -714,7 +714,7 @@ Para este projeto, a melhor solução normalmente será aquela que entrega uma e
 
 ## 37. Regra final
 
-A FN Consulting não deve parecer um template genérico de cybersecurity.
+A FN Security não deve parecer um template genérico de cybersecurity.
 
 Toda decisão de design e desenvolvimento deve reforçar uma marca de consultoria especializada, executiva, sóbria e orientada a riscos.
 
