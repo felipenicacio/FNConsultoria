@@ -1,10 +1,10 @@
-# FN Consulting — Direção de Identidade Visual
+# FN Security — Direção de Identidade Visual
 
 ## 1. Objetivo
 
-Este documento define a direção visual do site institucional da **FN Consulting** e deve orientar decisões de design, implementação, conteúdo visual e evolução futura da marca digital.
+Este documento define a direção visual do site institucional da **FN Security** e deve orientar decisões de design, implementação, conteúdo visual e evolução futura da marca digital.
 
-A identidade deve posicionar a FN Consulting como uma **consultoria boutique especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade**, com linguagem visual executiva, técnica e contemporânea.
+A identidade deve posicionar a FN Security como uma **consultoria boutique especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade**, com linguagem visual executiva, técnica e contemporânea.
 
 A marca deve evitar tanto a estética genérica de empresa de TI quanto os clichês visuais tradicionais de cibersegurança.
 
@@ -33,7 +33,7 @@ A marca deve transmitir:
 
 ## 3. Personalidade visual
 
-A FN Consulting deve parecer:
+A FN Security deve parecer:
 
 - estratégica, sem ser distante;
 - técnica, sem ser excessivamente operacional;
@@ -57,7 +57,7 @@ A FN Consulting deve parecer:
 
 A marca textual oficial no site é:
 
-**FN Consulting**
+**FN Security**
 
 Felipe Nicácio deve aparecer como consultor responsável e elemento de autoridade da marca.
 
@@ -485,7 +485,7 @@ A composição deve incluir:
 
 - fotografia ou avatar profissional quando disponível;
 - nome completo;
-- papel na FN Consulting;
+- papel na FN Security;
 - áreas de especialização;
 - resumo de experiência;
 - LinkedIn.
@@ -607,7 +607,7 @@ Nunca inverter essa ordem.
 
 Antes de introduzir qualquer novo elemento visual, avaliar:
 
-1. Ajuda o usuário a compreender a FN Consulting?
+1. Ajuda o usuário a compreender a FN Security?
 2. Reforça confiança e autoridade?
 3. Melhora a leitura ou a navegação?
 4. Está alinhado à estética de consultoria boutique?
@@ -619,7 +619,7 @@ Se a resposta for negativa, o elemento não deve ser adicionado.
 
 ## 25. Resumo da direção visual
 
-A FN Consulting deve utilizar uma linguagem visual baseada em:
+A FN Security deve utilizar uma linguagem visual baseada em:
 
 **Navy profundo + branco + azul de ação + teal pontual + tipografia forte + grids editoriais + espaço em branco + elementos abstratos de estrutura e conexão.**
 
