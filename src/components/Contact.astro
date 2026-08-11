@@ -1,0 +1,21 @@
+<section id="contato" class="section contact">
+  <div class="container contact-box">
+    <div>
+      <p class="eyebrow">Contato</p>
+      <h2>Sua organização sabe onde está e onde precisa chegar em Segurança da Informação?</h2>
+      <p class="lead">Compreender o cenário atual é o primeiro passo para transformar riscos, requisitos e prioridades em um plano estruturado de evolução.</p>
+    </div>
+    <div class="contact-actions">
+      <a class="button button-primary" href="https://www.linkedin.com/in/felipe-nicacio/" target="_blank" rel="noopener noreferrer">Fale pelo LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact { background: linear-gradient(180deg, white, var(--slate-100)); }
+  .contact-box { padding: clamp(2rem,5vw,4rem); border-radius: 32px; background: var(--navy-950); color: white; display: grid; grid-template-columns: 1.35fr .65fr; gap: 3rem; align-items: end; }
+  .contact h2 { color: white; max-width: 18ch; }
+  .contact .lead { color: #cbd5e1; }
+  .contact-actions { display: flex; justify-content: flex-end; }
+  @media (max-width: 760px) { .contact-box { grid-template-columns: 1fr; } .contact-actions { justify-content: flex-start; } }
+</style>
