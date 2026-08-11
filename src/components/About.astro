@@ -1,0 +1,22 @@
+<section class="section" aria-labelledby="about-title">
+  <div class="container about-grid">
+    <div>
+      <p class="eyebrow">FN Consulting</p>
+      <h2 id="about-title">Segurança como disciplina de gestão.</h2>
+    </div>
+    <div>
+      <p class="lead">A proteção das informações exige governança, gestão de riscos, processos, pessoas e decisões alinhadas aos objetivos do negócio.</p>
+      <p>A FN Consulting apoia organizações na estruturação e evolução de programas de Segurança da Informação, transformando requisitos técnicos, riscos e referências reconhecidas em modelos de gestão aplicáveis à realidade de cada organização.</p>
+      <div class="pill-row" aria-label="Princípios de atuação">
+        <span>Governança</span><span>Riscos</span><span>Estratégia</span><span>Resiliência</span><span>Pessoas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 4rem; align-items: start; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+  .pill-row span { border: 1px solid var(--slate-200); padding: .55rem .8rem; border-radius: 999px; font-size: .9rem; font-weight: 700; }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 1rem; } }
+</style>
