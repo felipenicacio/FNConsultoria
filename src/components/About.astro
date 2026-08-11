@@ -1,10 +1,11 @@
-<section class="section" aria-labelledby="about-title">
+<section class="section about" aria-labelledby="about-title">
   <div class="container about-grid">
-    <div>
+    <div class="about-heading">
       <p class="eyebrow">FN Consulting</p>
       <h2 id="about-title">Segurança como disciplina de gestão.</h2>
+      <span class="rule" aria-hidden="true"></span>
     </div>
-    <div>
+    <div class="about-copy">
       <p class="lead">A proteção das informações exige governança, gestão de riscos, processos, pessoas e decisões alinhadas aos objetivos do negócio.</p>
       <p>A FN Consulting apoia organizações na estruturação e evolução de programas de Segurança da Informação, transformando requisitos técnicos, riscos e referências reconhecidas em modelos de gestão aplicáveis à realidade de cada organização.</p>
       <div class="pill-row" aria-label="Princípios de atuação">
@@ -15,8 +16,14 @@
 </section>
 
 <style>
-  .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 4rem; align-items: start; }
-  .pill-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
-  .pill-row span { border: 1px solid var(--slate-200); padding: .55rem .8rem; border-radius: 999px; font-size: .9rem; font-weight: 700; }
-  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 1rem; } }
+  .about { position: relative; }
+  .about-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(3rem, 7vw, 7rem); align-items: start; }
+  .about-heading { position: sticky; top: 110px; }
+  .rule { display: block; width: 72px; height: 2px; margin-top: 2rem; background: linear-gradient(90deg, var(--blue-600), var(--teal-500)); }
+  .about-copy { padding-top: .25rem; }
+  .about-copy .lead { color: var(--navy-900); }
+  .about-copy > p:not(.lead) { max-width: 64ch; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid var(--slate-200); }
+  .pill-row span { padding: .5rem .75rem; border: 1px solid var(--slate-200); border-radius: 999px; color: var(--slate-700); background: var(--white); font-size: .82rem; font-weight: 750; }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 1.5rem; } .about-heading { position: static; } }
 </style>
