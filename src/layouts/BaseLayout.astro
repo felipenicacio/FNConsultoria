@@ -21,16 +21,21 @@ interface Props {
 /**
  * Domínio do site.
  *
- * Em desenvolvimento ou enquanto o domínio definitivo não estiver aprovado
- * (Fase 7 — QA e Publicação V1), define PUBLIC_SITE_URL na variável de
- * ambiente para sobrescrever o placeholder.
+ * Domínio registrado: fnsecurity.com.br (FEL-32 concluída)
+ * Endereço canônico de produção: https://www.fnsecurity.com.br
+ * Redirect: fnsecurity.com.br/* → https://www.fnsecurity.com.br/${1} (301, Cloudflare)
+ * Configuração Cloudflare Pages em andamento: FEL-36
  *
- * Cloudflare Pages: Settings → Environment variables → PUBLIC_SITE_URL
- * Desenvolvimento local: .env → PUBLIC_SITE_URL=http://localhost:4321
+ * PUBLIC_SITE_URL está definida como https://www.fnsecurity.com.br
+ * nas variáveis de ambiente de produção do Cloudflare Pages.
  *
- * O fallback abaixo é intencional — sinaliza que o domínio ainda não foi
- * aprovado. Não o substitua por um domínio fixo antes da Fase 7.
- * Domínio planejado para produção: https://www.fnsecurity.com.br (FEL-32/FEL-36)
+ * Para desenvolvimento local: .env → PUBLIC_SITE_URL=http://localhost:4321
+ *
+ * O fallback abaixo é intencional — garante que builds locais sem a
+ * variável definida usem um placeholder claramente não-produtivo,
+ * sem apontar para o domínio real. Não substitua o fallback por
+ * https://www.fnsecurity.com.br — o domínio de produção deve vir
+ * exclusivamente da variável de ambiente.
  */
 const SITE_URL =
   import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||

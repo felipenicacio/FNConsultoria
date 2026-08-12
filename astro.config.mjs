@@ -5,12 +5,19 @@ import { seoReadySlugs } from './src/data/services.ts';
 /**
  * Domínio do site — lido da variável de ambiente PUBLIC_SITE_URL.
  *
- * Defina PUBLIC_SITE_URL nas variáveis de ambiente da plataforma de
- * hospedagem (Cloudflare Pages: Settings → Environment variables) ou
- * no arquivo .env local para desenvolvimento.
+ * Domínio registrado: fnsecurity.com.br (FEL-32 concluída)
+ * Endereço canônico de produção: https://www.fnsecurity.com.br
+ * Redirect: fnsecurity.com.br/* → https://www.fnsecurity.com.br/${1} (301, Cloudflare)
+ * Configuração Cloudflare Pages em andamento: FEL-36
  *
- * O fallback sinaliza que o domínio ainda não está aprovado.
- * Não substitua por domínio fixo antes da Fase 7 — QA e Publicação V1.
+ * PUBLIC_SITE_URL está definida como https://www.fnsecurity.com.br
+ * nas variáveis de ambiente de produção do Cloudflare Pages.
+ *
+ * Para desenvolvimento local: .env → PUBLIC_SITE_URL=http://localhost:4321
+ *
+ * O fallback abaixo é intencional — builds sem a variável usam um
+ * placeholder claramente não-produtivo. Não substitua o fallback pelo
+ * domínio real — produção deve vir exclusivamente da variável de ambiente.
  */
 const SITE_URL =
   process.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||
