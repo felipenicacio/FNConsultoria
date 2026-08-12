@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 620" role="img" aria-labelledby="title desc">
+  <title id="title">Escudo digital</title><desc id="desc">Escudo azul abstrato representando segurança e resiliência</desc>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1769e0"/><stop offset=".45" stop-color="#0b2f66"/><stop offset="1" stop-color="#07111f"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#52b7ff" stop-opacity=".35"/><stop offset="1" stop-color="#52b7ff" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M0 24h48M24 0v48" stroke="#69c4ff" stroke-opacity=".12" stroke-width="1"/><circle cx="24" cy="24" r="2" fill="#69c4ff" fill-opacity=".55"/></pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="#1769e0" flood-opacity=".22"/></filter>
+  </defs>
+  <circle cx="310" cy="310" r="285" fill="url(#glow)"/>
+  <g filter="url(#shadow)">
+    <path d="M310 54c77 48 147 58 204 66v154c0 135-77 224-204 282C183 498 106 409 106 274V120c57-8 127-18 204-66Z" fill="url(#g)" stroke="#4ba7ff" stroke-width="8"/>
+    <path d="M310 86c67 39 126 48 174 55v133c0 116-64 193-174 246-110-53-174-130-174-246V141c48-7 107-16 174-55Z" fill="url(#grid)" stroke="#68bdff" stroke-opacity=".45" stroke-width="2"/>
+    <path d="M310 196c-52 0-94 42-94 94 0 35 19 65 47 81l-18 101h130l-18-101c28-16 47-46 47-81 0-52-42-94-94-94Zm0 43c28 0 51 23 51 51 0 23-15 42-36 49l14 89h-58l14-89c-21-7-36-26-36-49 0-28 23-51 51-51Z" fill="#fff" fill-opacity=".96" stroke="#7cc8ff" stroke-width="5"/>
+  </g>
+</svg>
