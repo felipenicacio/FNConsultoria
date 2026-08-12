@@ -1,16 +1,17 @@
 ---
 /**
- * Home — FEL-40
+ * Home — FEL-40 / FEL-41
  *
- * Ordem das seções conforme baseline do Notion (04 — Tom de Voz e Conteúdo da Home):
- * Hero → Contexto/Problema → Serviços (principais + transversal + complementares)
- * → Jornada → Diferenciais/Referências → Autoridade consultiva → CTA final
+ * Ordem das seções (baseline FEL-40, atualizada FEL-41):
+ * Hero → Contexto/Desafios → Serviços → Visão integrada → Jornada
+ * → Como atuamos / Diferenciais → Referências → Autoridade consultiva → CTA final
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Services from '../components/Services.astro';
+import IntegratedVision from '../components/IntegratedVision.astro';
 import Journey from '../components/Journey.astro';
 import Methodology from '../components/Methodology.astro';
 import ConsultantProfile from '../components/ConsultantProfile.astro';
@@ -24,6 +25,7 @@ import Footer from '../components/Footer.astro';
     <Hero />
     <About />
     <Services />
+    <IntegratedVision />
     <Journey />
     <Methodology />
     <ConsultantProfile />
