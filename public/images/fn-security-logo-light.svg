@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 150" role="img" aria-labelledby="title desc">
+  <title id="title">FN Security</title>
+  <desc id="desc">Marca FN Security em azul-marinho para aplicação sobre fundo claro</desc>
+  <g fill="none" stroke="#0b1f3a" stroke-width="7" stroke-linejoin="round">
+    <path d="M248 19c20 12 38 14 52 16v35c0 30-18 48-52 61-34-13-52-31-52-61V35c14-2 32-4 52-16Z"/>
+  </g>
+  <path fill="#0b1f3a" d="M42 38h93v18H65v20h58v18H65v37H42V38Zm101 0h22l55 59V38h23v93h-20l-57-61v61h-23V38Z"/>
+  <path fill="#1769e0" d="M143 38h22l55 59V38h23v93h-20l-57-61v61h-23V38Z" opacity=".28"/>
+  <path fill="#0b1f3a" d="M245 66a9 9 0 1 1 7 8.8V93h-14V74.8a9 9 0 0 1 7-8.8Z"/>
+  <text x="42" y="146" fill="#0b1f3a" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="12">SECURITY</text>
+</svg>
