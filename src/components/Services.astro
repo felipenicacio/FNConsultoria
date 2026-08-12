@@ -19,7 +19,7 @@ import { primaryServices, complementaryServices, transversalServices } from '../
     <div class="section-header services-header">
       <div>
         <p class="eyebrow">Serviços</p>
-        <h2 id="servicos-title">Quatro serviços principais. Uma capacidade transversal. Especializações quando necessário.</h2>
+        <h2 id="servicos-title">Da avaliação do cenário atual à construção de capacidades sustentáveis.</h2>
       </div>
       <p class="lead services-lead">
         Serviços estruturados para avaliar o cenário atual, definir prioridades e
@@ -31,7 +31,6 @@ import { primaryServices, complementaryServices, transversalServices } from '../
     <div class="services-grid" aria-label="Serviços principais">
       {primaryServices.map((service) => (
         <article class="service-card">
-          <span class="service-layer-label">Principal</span>
           <h3><a href={`/servicos/${service.slug}`}>{service.title}</a></h3>
           <p class="service-outcome">{service.outcome}</p>
           <a
@@ -113,14 +112,6 @@ import { primaryServices, complementaryServices, transversalServices } from '../
   .service-card:hover {
     border-color: var(--blue-600);
     box-shadow: 0 8px 32px rgba(23,105,224,.07);
-  }
-
-  .service-layer-label {
-    color: var(--blue-600);
-    font-size: .68rem;
-    font-weight: 900;
-    letter-spacing: .14em;
-    text-transform: uppercase;
   }
 
   .service-card h3 {
