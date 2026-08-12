@@ -1,38 +1,206 @@
+<!--
+  Footer — FEL-53
+  Estrutura: Marca | Institucional | Contato
+  Dados de contato oficiais aprovados em 12/08/2026.
+  Sem coluna Serviços, sem Política de Privacidade, sem Termos de Uso.
+  Sem localização/endereço.
+  LinkedIn: https://www.linkedin.com/company/fn-security
+-->
 <footer class="footer">
   <div class="container footer-grid">
+
+    <!-- Coluna 1 — Marca -->
     <div class="footer-brand">
-      <a class="brand" href="#inicio" aria-label="FN Security - Início"><strong>FN</strong><span>Security</span></a>
-      <p>Segurança da Informação · Governança · Gestão de Riscos · Continuidade de Negócios · Privacidade</p>
-      <small>Felipe Nicácio · Consultor responsável</small>
+      <a class="brand-wordmark" href="#inicio" aria-label="FN Security — Início">
+        <strong>FN</strong><span>Security</span>
+      </a>
+      <p class="footer-tagline">
+        Segurança da Informação orientada por riscos e prioridades do negócio.
+      </p>
+      <a
+        class="footer-linkedin"
+        href="https://www.linkedin.com/company/fn-security"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="FN Security no LinkedIn (abre em nova aba)"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+        LinkedIn
+      </a>
     </div>
-    <nav aria-label="Navegação do rodapé">
-      <a href="#servicos">Serviços</a>
-      <a href="#como-atuamos">Como atuamos</a>
-      <a href="#referencias">Referências</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#contato">Contato</a>
+
+    <!-- Coluna 2 — Institucional -->
+    <nav class="footer-nav" aria-label="Navegação institucional">
+      <p class="footer-col-title">Institucional</p>
+      <ul>
+        <li><a href="#como-atuamos">Método</a></li>
+        <li><a href="#sobre">Quem somos</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
     </nav>
+
+    <!-- Coluna 3 — Contato -->
+    <div class="footer-contact">
+      <p class="footer-col-title">Contato</p>
+      <ul>
+        <li>
+          <a href="mailto:contato@fnsecurity.com.br">
+            contato@fnsecurity.com.br
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://wa.me/5521979044865"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp FN Security (abre em nova aba)"
+          >
+            +55 21 97904-4865
+          </a>
+        </li>
+      </ul>
+    </div>
+
   </div>
-  <div class="container legal">
-    <small>As informações apresentadas possuem caráter institucional e informativo e não representam garantia de certificação, conformidade integral ou eliminação de riscos.</small>
-    <span aria-hidden="true"></span>
-    <small>FN Security</small>
+
+  <!-- Faixa legal -->
+  <div class="container footer-legal">
+    <span class="footer-divider" aria-hidden="true"></span>
+    <p class="footer-copyright">
+      © <span id="footer-year"></span> FN Security. Todos os direitos reservados.
+    </p>
   </div>
 </footer>
 
+<script>
+  const el = document.getElementById('footer-year');
+  if (el) el.textContent = String(new Date().getFullYear());
+</script>
+
 <style>
-  .footer { padding: 4rem 0 2rem; background: var(--navy-950); color: white; }
-  .footer-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 4rem; align-items: start; }
-  .brand { display: inline-flex; align-items: baseline; gap: .45rem; letter-spacing: -.04em; }
-  .brand strong { color: white; font-size: 1.45rem; font-weight: 900; }
-  .brand span { color: #94a3b8; font-size: 1.05rem; font-weight: 650; letter-spacing: -.02em; }
-  .footer-brand p, .footer-brand small { color: #94a3b8; }
-  .footer-brand p { max-width: 62ch; margin: 1.1rem 0 .45rem; }
-  nav { display: flex; justify-content: flex-end; gap: 1.15rem; flex-wrap: wrap; align-content: flex-start; font-size: .88rem; font-weight: 700; }
-  nav a { color: #cbd5e1; }
-  nav a:hover { color: white; }
-  .legal { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; gap: 1rem; color: #94a3b8; }
-  .legal small:first-child { max-width: 76ch; }
-  .legal span { flex: 1; height: 1px; background: rgba(255,255,255,.08); }
-  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } nav { justify-content: flex-start; } .legal { align-items: flex-start; flex-direction: column; } .legal span { display: none; } }
+  .footer {
+    padding: 4.5rem 0 0;
+    background: var(--navy-950);
+    color: white;
+  }
+
+  /* Grid de 3 colunas */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr .8fr .8fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: start;
+    padding-bottom: 3.5rem;
+  }
+
+  /* ── Marca ── */
+  .brand-wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .42rem;
+    letter-spacing: -.04em;
+    margin-bottom: 1rem;
+  }
+  .brand-wordmark strong { color: white; font-size: 1.4rem; font-weight: 900; }
+  .brand-wordmark span  { color: #94a3b8; font-size: 1.02rem; font-weight: 650; letter-spacing: -.02em; }
+
+  .footer-tagline {
+    color: #94a3b8;
+    font-size: .88rem;
+    line-height: 1.6;
+    max-width: 36ch;
+    margin: 0 0 1.5rem;
+  }
+
+  .footer-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: #7dd3fc;
+    font-size: .84rem;
+    font-weight: 700;
+    transition: color .2s ease;
+  }
+  .footer-linkedin:hover { color: white; }
+  .footer-linkedin svg { flex-shrink: 0; }
+
+  /* ── Colunas Institucional e Contato ── */
+  .footer-col-title {
+    color: #7dd3fc;
+    font-size: .7rem;
+    font-weight: 900;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin: 0 0 1.1rem;
+  }
+
+  .footer-nav ul,
+  .footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+  }
+
+  .footer-nav a,
+  .footer-contact a {
+    color: #cbd5e1;
+    font-size: .88rem;
+    font-weight: 600;
+    transition: color .2s ease;
+  }
+  .footer-nav a:hover,
+  .footer-contact a:hover { color: white; }
+
+  /* ── Faixa legal ── */
+  .footer-legal {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding: 1.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .footer-divider {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,.06);
+  }
+
+  .footer-copyright {
+    margin: 0;
+    color: #64748b;
+    font-size: .8rem;
+    white-space: nowrap;
+  }
+
+  /* ── Responsividade ── */
+  @media (max-width: 860px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .footer-brand { grid-column: auto; }
+    .footer-legal {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .5rem;
+    }
+    .footer-divider { display: none; }
+  }
 </style>
