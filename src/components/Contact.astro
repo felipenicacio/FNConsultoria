@@ -1,29 +1,58 @@
-<section id="contato" class="section contact">
+<section id="contato" class="section contact" aria-labelledby="contact-title">
   <div class="container contact-box">
     <div>
-      <p class="eyebrow">Contato</p>
-      <h2>Sua organização sabe onde está e onde precisa chegar em Segurança da Informação?</h2>
-      <p class="lead">Compreender o cenário atual é o primeiro passo para transformar riscos, requisitos e prioridades em um plano estruturado de evolução.</p>
+      <p class="eyebrow">Próximo passo</p>
+      <h2 id="contact-title">Converse sobre os desafios de Segurança da Informação da sua organização.</h2>
+      <p class="lead">Uma conversa inicial ajuda a definir contexto, necessidade e a abordagem mais adequada para a sua realidade.</p>
     </div>
     <div class="contact-side">
-      <span class="contact-kicker">Próximo passo</span>
-      <p>Uma conversa inicial pode ajudar a definir o contexto, a necessidade e a abordagem mais adequada para sua organização.</p>
-      <a class="button button-primary" href="https://www.linkedin.com/in/felipe-nicacio/" target="_blank" rel="noopener noreferrer">Fale pelo LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+      <p>O primeiro passo é compreender o contexto, a necessidade e as prioridades da sua organização.</p>
+      <a
+        class="button button-primary"
+        href="https://www.linkedin.com/in/felipe-nicacio/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Fale pelo LinkedIn
+        <span class="sr-only"> (abre em nova aba)</span>
+      </a>
     </div>
   </div>
 </section>
 
 <style>
   .contact { background: linear-gradient(180deg, var(--white), var(--slate-100)); }
-  .contact-box { position: relative; padding: clamp(2.4rem,5vw,4.5rem); border-radius: var(--radius-xl); background: var(--navy-950); color: white; display: grid; grid-template-columns: 1.25fr .75fr; gap: 4rem; align-items: end; overflow: hidden; box-shadow: var(--shadow-soft); }
-  .contact-box::before { content: ""; position: absolute; width: 360px; height: 360px; right: -130px; bottom: -190px; border: 1px solid rgba(125,211,252,.14); border-radius: 50%; box-shadow: 0 0 0 65px rgba(23,105,224,.025), 0 0 0 130px rgba(26,167,161,.018); }
-  .contact > .container > div, .contact-side { position: relative; z-index: 1; }
+  .contact-box {
+    position: relative;
+    padding: clamp(2.4rem, 5vw, 4.5rem);
+    border-radius: var(--radius-xl);
+    background: var(--navy-950);
+    color: white;
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 4rem;
+    align-items: end;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .contact-box::before {
+    content: "";
+    position: absolute;
+    width: 360px; height: 360px;
+    right: -130px; bottom: -190px;
+    border: 1px solid rgba(125,211,252,.14);
+    border-radius: 50%;
+    box-shadow: 0 0 0 65px rgba(23,105,224,.025), 0 0 0 130px rgba(26,167,161,.018);
+  }
+  .contact > .container > div,
+  .contact-side { position: relative; z-index: 1; }
   .contact .eyebrow { color: #7dd3fc; }
-  .contact h2 { color: white; max-width: 18ch; }
+  .contact h2 { color: white; max-width: 22ch; }
   .contact .lead { color: #cbd5e1; }
   .contact-side { padding-left: 1.8rem; border-left: 1px solid rgba(255,255,255,.12); }
-  .contact-side p { color: #cbd5e1; font-size: .94rem; }
-  .contact-kicker { display: block; margin-bottom: .8rem; color: #5eead4; font-size: .7rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
-  .contact-side .button { margin-top: 1rem; }
-  @media (max-width: 760px) { .contact-box { grid-template-columns: 1fr; gap: 2rem; } .contact-side { padding: 1.5rem 0 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.12); } }
+  .contact-side p { color: #cbd5e1; font-size: .94rem; margin-bottom: 1.5rem; }
+  @media (max-width: 760px) {
+    .contact-box { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-side { padding: 1.5rem 0 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.12); }
+  }
 </style>

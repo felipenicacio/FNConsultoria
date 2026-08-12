@@ -1,66 +1,178 @@
 ---
-const methods = [
-  ['Entender', 'Compreender contexto, objetivos, riscos, processos e prioridades.'],
-  ['Avaliar', 'Analisar o cenário atual com base em evidências, normas e frameworks.'],
-  ['Priorizar', 'Ordenar lacunas e iniciativas considerando risco, impacto e capacidade.'],
-  ['Estruturar', 'Definir processos, controles, responsabilidades, indicadores e iniciativas.'],
-  ['Evoluir', 'Mensurar resultados e sustentar ciclos de revisão e melhoria contínua.']
+/**
+ * Diferenciais e referências — Home. FEL-40.
+ *
+ * Substitui o bloco "Entender → Evoluir" (que criava sobreposição conceitual
+ * com a jornada comercial) pelos quatro diferenciais aprovados no Notion 04.
+ *
+ * Referências metodológicas mantidas em formato compacto,
+ * sem logos e sem repetição da proposta de valor.
+ */
+
+const differentials = [
+  {
+    label: 'Risco antes da burocracia.',
+    description: 'O ponto de partida é sempre a exposição real da organização, não a conformidade pelo checklist.',
+  },
+  {
+    label: 'Estratégia antes da ferramenta.',
+    description: 'Tecnologia e controles são meios. A decisão sobre o que estruturar começa pelo contexto e pelos objetivos.',
+  },
+  {
+    label: 'Frameworks como referência, contexto como decisão.',
+    description: 'ISO, NIST e demais normas orientam o trabalho. A realidade de cada organização define o que e como implementar.',
+  },
+  {
+    label: 'Diagnóstico deve levar à ação.',
+    description: 'Avaliações e relatórios têm valor quando transformados em prioridades, decisões e planos executáveis.',
+  },
+] as const;
+
+const references = [
+  'NIST CSF 2.0', 'ISO/IEC 27001', 'ISO/IEC 27002',
+  'ISO/IEC 27005', 'ISO/IEC 27701', 'ISO 22301', 'ISO 31000', 'NIST RMF',
 ];
-const references = ['ISO/IEC 27001', 'ISO/IEC 27002', 'ISO/IEC 27005', 'ISO/IEC 27701', 'ISO 22301', 'ISO 31000', 'NIST CSF 2.0', 'NIST RMF'];
 ---
-<section id="metodologia" class="section methodology-section">
+
+<section id="como-atuamos" class="section differentials-section" aria-labelledby="differentials-title">
   <div class="container">
-    <div class="section-header method-header">
+    <div class="section-header diff-header">
       <div>
-        <p class="eyebrow">Metodologia</p>
-        <h2>Da compreensão do cenário à evolução.</h2>
+        <p class="eyebrow">Como atuamos</p>
+        <h2 id="differentials-title">O que orienta cada trabalho.</h2>
       </div>
-      <p class="lead">Uma abordagem consultiva baseada em contexto, evidências e prioridades, evitando implementações desconectadas da realidade da organização.</p>
+      <p class="lead diff-lead">
+        A abordagem da FN Security parte do contexto real da organização,
+        não de modelos genéricos ou conformidade pela conformidade.
+      </p>
     </div>
-    <div class="method-grid">
-      {methods.map(([title, text], index) => (
-        <article class="method">
-          <div class="method-marker"><span>{String(index + 1).padStart(2, '0')}</span></div>
-          <h3>{title}</h3>
-          <p>{text}</p>
-        </article>
+
+    <ol class="diff-grid" aria-label="Diferenciais de atuação">
+      {differentials.map(({ label, description }, index) => (
+        <li class="diff-item">
+          <span class="diff-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <strong class="diff-label">{label}</strong>
+          <p class="diff-desc">{description}</p>
+        </li>
       ))}
-    </div>
+    </ol>
   </div>
 </section>
 
-<section id="referencias" class="section references">
+<section id="referencias" class="section references-section" aria-labelledby="references-title">
   <div class="container reference-grid">
     <div>
       <p class="eyebrow">Referências</p>
-      <h2>Frameworks como instrumentos de gestão, não como fim.</h2>
-      <p class="lead">A FN Security utiliza normas e frameworks reconhecidos internacionalmente para estruturar avaliações, decisões e modelos de gestão adequados ao contexto de cada organização.</p>
+      <h2 id="references-title">Frameworks como instrumentos de gestão, não como fim.</h2>
+      <p class="lead ref-lead">A FN Security utiliza normas e frameworks reconhecidos internacionalmente para estruturar avaliações, decisões e modelos de gestão adequados ao contexto de cada organização.</p>
     </div>
-    <div class="tags" aria-label="Normas e frameworks utilizados">
-      {references.map((reference) => <span>{reference}</span>)}
+    <div class="tags" aria-label="Normas e frameworks utilizados pela FN Security">
+      {references.map((ref) => <span>{ref}</span>)}
     </div>
   </div>
 </section>
 
 <style>
-  .methodology-section { background: var(--slate-100); }
-  .method-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
-  .method-header .lead { margin: 0; }
-  .method-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
-  .method { padding: 1.4rem 1.2rem 1.5rem 0; border-top: 1px solid var(--slate-300); }
-  .method-marker { display: flex; align-items: center; gap: .65rem; }
-  .method-marker::after { content: ""; width: 28px; height: 1px; background: var(--teal-500); }
-  .method span { color: var(--blue-600); font-size: .72rem; font-weight: 900; letter-spacing: .12em; }
-  .method h3 { margin: 2.1rem 0 .6rem; }
-  .method p { margin-bottom: 0; font-size: .94rem; }
-  .references { position: relative; background: var(--navy-950); color: white; overflow: hidden; }
-  .references::after { content: ""; position: absolute; width: 420px; height: 420px; right: -140px; top: -180px; border: 1px solid rgba(125,211,252,.12); border-radius: 50%; box-shadow: 0 0 0 70px rgba(23,105,224,.025), 0 0 0 140px rgba(26,167,161,.018); }
-  .references h2 { color: white; }
-  .references .eyebrow { color: #7dd3fc; }
-  .references .lead { color: #cbd5e1; }
-  .reference-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.08fr .92fr; gap: 4.5rem; align-items: center; }
+  /* Diferenciais */
+  .differentials-section { background: var(--slate-100); }
+
+  .diff-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+  .diff-lead { margin: 0; }
+
+  .diff-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--slate-300);
+  }
+
+  .diff-item {
+    padding: 1.8rem 1.4rem 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    border-right: 1px solid var(--slate-300);
+  }
+  .diff-item:last-child { border-right: 0; padding-right: 0; }
+
+  .diff-index {
+    color: var(--blue-600);
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .14em;
+  }
+
+  .diff-label {
+    display: block;
+    color: var(--navy-950);
+    font-size: 1rem;
+    line-height: 1.3;
+    font-weight: 750;
+    margin-top: auto;
+  }
+
+  .diff-desc {
+    margin: 0;
+    color: var(--slate-500);
+    font-size: .86rem;
+    line-height: 1.55;
+  }
+
+  /* Referências */
+  .references-section {
+    background: var(--navy-950);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .references-section::after {
+    content: "";
+    position: absolute;
+    width: 420px; height: 420px;
+    right: -140px; top: -180px;
+    border: 1px solid rgba(125,211,252,.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 70px rgba(23,105,224,.025), 0 0 0 140px rgba(26,167,161,.018);
+  }
+
+  .reference-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.08fr .92fr;
+    gap: 4.5rem;
+    align-items: center;
+  }
+  .references-section h2 { color: white; }
+  .references-section .eyebrow { color: #7dd3fc; }
+  .ref-lead { color: #cbd5e1; }
+
   .tags { display: flex; flex-wrap: wrap; gap: .65rem; }
-  .tags span { padding: .72rem .95rem; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; color: #e2e8f0; background: rgba(255,255,255,.035); font-size: .86rem; font-weight: 650; }
-  @media (max-width: 900px) { .method-header, .reference-grid { grid-template-columns: 1fr; gap: 1.5rem; } .method-grid { grid-template-columns: repeat(2,1fr); } }
-  @media (max-width: 520px) { .method-grid { grid-template-columns: 1fr; } }
+  .tags span {
+    padding: .72rem .95rem;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    color: #e2e8f0;
+    background: rgba(255,255,255,.035);
+    font-size: .86rem;
+    font-weight: 650;
+  }
+
+  @media (max-width: 900px) {
+    .diff-header, .reference-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .diff-grid { grid-template-columns: repeat(2, 1fr); }
+    .diff-item { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--slate-300); }
+    .diff-item:last-child { border-bottom: 0; }
+  }
+  @media (max-width: 520px) {
+    .diff-grid { grid-template-columns: 1fr; }
+  }
 </style>
