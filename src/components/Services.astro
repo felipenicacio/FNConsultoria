@@ -1,19 +1,16 @@
 ---
 /**
- * Seção de serviços — Home.
+ * Seção de serviços — Home. FEL-40.
  *
- * GOVERNANÇA
- * ──────────────────────────────────────────────────────────────────────────
- * Destaque visual definitivo, ordenação final e textos dos cards dependem
- * da conclusão das FEL-19 a FEL-24. Este componente usa os dados de
- * services.ts e respeita a separação por camada aprovada na FEL-18:
- *   - primary       → grid principal
- *   - complementary → bloco secundário
- *   - transversal   → não exposta como card nesta seção
+ * Hierarquia aprovada na FEL-18, baseline vigente na FEL-24:
+ *   primary       → 4 cards principais, alta exposição
+ *   transversal   → bloco de conexão (Gestão de Riscos), não quinto card
+ *   complementary → bloco secundário compacto
  *
- * Nenhum card tem destaque visual fixo até a FEL-24 ser concluída.
+ * Cards simplificados (FEL-40): nome + benefício curto + link.
+ * Destaque visual final pendente da FEL-24.
  */
-import { primaryServices, complementaryServices } from '../data/services';
+import { primaryServices, complementaryServices, transversalServices } from '../data/services';
 ---
 
 <section id="servicos" class="section services-section" aria-labelledby="servicos-title">
@@ -22,29 +19,21 @@ import { primaryServices, complementaryServices } from '../data/services';
     <div class="section-header services-header">
       <div>
         <p class="eyebrow">Serviços</p>
-        <h2 id="servicos-title">Da avaliação do cenário atual à construção de capacidades sustentáveis.</h2>
+        <h2 id="servicos-title">Quatro serviços principais. Uma capacidade transversal. Especializações quando necessário.</h2>
       </div>
-      <p class="lead">
-        Serviços estruturados para apoiar decisões, organizar prioridades e desenvolver
-        a Segurança da Informação como capacidade de gestão.
+      <p class="lead services-lead">
+        Serviços estruturados para avaliar o cenário atual, definir prioridades e
+        construir capacidades sustentáveis de Segurança da Informação.
       </p>
     </div>
 
+    <!-- Serviços principais -->
     <div class="services-grid" aria-label="Serviços principais">
       {primaryServices.map((service) => (
         <article class="service-card">
-          <div class="service-meta">
-            <span class="service-layer">Principal</span>
-            <span class="line" aria-hidden="true"></span>
-          </div>
-          <h3>
-            <a href={`/servicos/${service.slug}`}>{service.title}</a>
-          </h3>
-          <p class="description">{service.description}</p>
-          <div class="outcome-wrap">
-            <span>Resultado esperado</span>
-            <p class="outcome">{service.outcome}</p>
-          </div>
+          <span class="service-layer-label">Principal</span>
+          <h3><a href={`/servicos/${service.slug}`}>{service.title}</a></h3>
+          <p class="service-outcome">{service.outcome}</p>
           <a
             class="service-link"
             href={`/servicos/${service.slug}`}
@@ -56,6 +45,23 @@ import { primaryServices, complementaryServices } from '../data/services';
       ))}
     </div>
 
+    <!-- Gestão de Riscos — capacidade transversal -->
+    {transversalServices.map((service) => (
+      <div class="transversal-block" aria-label="Capacidade transversal">
+        <div class="transversal-inner">
+          <div class="transversal-content">
+            <span class="transversal-label">Capacidade transversal</span>
+            <h3>{service.title}</h3>
+            <p>Gestão de Riscos conecta diagnóstico, prioridades, governança e tratamento das exposições de Segurança da Informação. Está presente em todos os serviços principais e pode ser contratada de forma independente quando a organização necessita estruturar ou revisar especificamente sua metodologia.</p>
+          </div>
+          <a class="transversal-link" href={`/servicos/${service.slug}`}>
+            Como funciona <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    ))}
+
+    <!-- Serviços complementares e especializados -->
     {complementaryServices.length > 0 && (
       <div class="complementary-block">
         <p class="complementary-label">Serviços complementares e especializados</p>
@@ -64,7 +70,7 @@ import { primaryServices, complementaryServices } from '../data/services';
             <li>
               <a class="complementary-card" href={`/servicos/${service.slug}`}>
                 <strong>{service.shortTitle}</strong>
-                <p>{service.description}</p>
+                <p>{service.outcome}</p>
                 <span class="card-arrow" aria-hidden="true">→</span>
               </a>
             </li>
@@ -81,12 +87,13 @@ import { primaryServices, complementaryServices } from '../data/services';
 
   .services-header {
     display: grid;
-    grid-template-columns: 1.05fr .95fr;
+    grid-template-columns: 1.1fr .9fr;
     gap: 4rem;
     align-items: end;
   }
-  .services-header .lead { margin: 0; }
+  .services-lead { margin: 0; }
 
+  /* Serviços principais */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -94,11 +101,10 @@ import { primaryServices, complementaryServices } from '../data/services';
   }
 
   .service-card {
-    position: relative;
-    padding: clamp(1.7rem, 3vw, 2.35rem);
+    padding: clamp(1.6rem, 2.5vw, 2.2rem);
     display: flex;
     flex-direction: column;
-    gap: .55rem;
+    gap: .6rem;
     border: 1px solid var(--slate-200);
     border-radius: var(--radius-lg);
     background: var(--white);
@@ -106,43 +112,31 @@ import { primaryServices, complementaryServices } from '../data/services';
   }
   .service-card:hover {
     border-color: var(--blue-600);
-    box-shadow: 0 12px 40px rgba(23,105,224,.07);
+    box-shadow: 0 8px 32px rgba(23,105,224,.07);
   }
 
-  .service-meta { display: flex; align-items: center; gap: .9rem; }
-  .service-layer {
+  .service-layer-label {
     color: var(--blue-600);
+    font-size: .68rem;
     font-weight: 900;
-    font-size: .72rem;
     letter-spacing: .14em;
     text-transform: uppercase;
   }
-  .line { width: 44px; height: 1px; background: var(--slate-200); }
 
-  .service-card h3 { margin: 1.2rem 0 0; font-size: clamp(1.15rem, 1.9vw, 1.5rem); line-height: 1.2; }
+  .service-card h3 {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    line-height: 1.2;
+    margin: .4rem 0 0;
+  }
   .service-card h3 a { color: var(--navy-950); transition: color .2s ease; }
   .service-card h3 a:hover { color: var(--blue-600); }
 
-  .description { margin: 0; max-width: 62ch; font-size: .94rem; }
-
-  .outcome-wrap {
-    margin-top: auto;
-    padding-top: 1.3rem;
-    border-top: 1px solid var(--slate-200);
-  }
-  .outcome-wrap > span {
-    color: var(--slate-500);
-    font-size: .67rem;
-    font-weight: 850;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-  }
-  .outcome {
-    margin: .4rem 0 0;
-    color: var(--navy-900);
-    font-weight: 750;
-    line-height: 1.45;
+  .service-outcome {
+    margin: 0;
+    color: var(--slate-700);
     font-size: .92rem;
+    line-height: 1.5;
+    flex: 1;
   }
 
   .service-link {
@@ -156,6 +150,59 @@ import { primaryServices, complementaryServices } from '../data/services';
     transition: gap .2s ease;
   }
   .service-link:hover { gap: .65rem; }
+
+  /* Gestão de Riscos — transversal */
+  .transversal-block {
+    margin-top: 1rem;
+    border: 1px solid rgba(26,167,161,.3);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(26,167,161,.06), rgba(23,105,224,.04));
+  }
+
+  .transversal-inner {
+    padding: clamp(1.4rem, 2.5vw, 2rem);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+  }
+
+  .transversal-label {
+    display: inline-block;
+    color: var(--teal-500);
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: .6rem;
+  }
+
+  .transversal-content h3 {
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    color: var(--navy-950);
+    margin: 0 0 .6rem;
+  }
+
+  .transversal-content p {
+    margin: 0;
+    color: var(--slate-700);
+    font-size: .9rem;
+    line-height: 1.6;
+    max-width: 76ch;
+  }
+
+  .transversal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    white-space: nowrap;
+    color: var(--teal-500);
+    font-size: .86rem;
+    font-weight: 800;
+    transition: gap .2s ease;
+    flex-shrink: 0;
+  }
+  .transversal-link:hover { gap: .65rem; }
 
   /* Complementares */
   .complementary-block {
@@ -176,28 +223,30 @@ import { primaryServices, complementaryServices } from '../data/services';
     padding: 0;
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: .75rem;
   }
   .complementary-card {
     display: flex;
     flex-direction: column;
     gap: .4rem;
-    padding: 1.2rem 1.4rem;
+    padding: 1.1rem 1.3rem;
     border: 1px solid var(--slate-200);
     border-radius: var(--radius-md);
     background: var(--white);
     transition: border-color .2s ease, transform .2s ease;
   }
   .complementary-card:hover { border-color: var(--slate-300); transform: translateY(-2px); }
-  .complementary-card strong { display: block; color: var(--navy-950); font-size: .96rem; }
-  .complementary-card p { margin: 0; color: var(--slate-700); font-size: .84rem; line-height: 1.5; }
-  .card-arrow { color: var(--teal-500); font-weight: 900; margin-top: .3rem; font-size: .88rem; }
+  .complementary-card strong { display: block; color: var(--navy-950); font-size: .94rem; }
+  .complementary-card p { margin: 0; color: var(--slate-700); font-size: .84rem; line-height: 1.5; flex: 1; }
+  .card-arrow { color: var(--teal-500); font-weight: 900; font-size: .88rem; margin-top: .2rem; }
 
-  @media (max-width: 820px) {
+  @media (max-width: 900px) {
     .services-header { grid-template-columns: 1fr; gap: 1.4rem; }
+    .transversal-inner { grid-template-columns: 1fr; gap: 1rem; }
+    .transversal-link { align-self: flex-start; }
   }
-  @media (max-width: 760px) {
+  @media (max-width: 700px) {
     .services-grid { grid-template-columns: 1fr; }
   }
 </style>
