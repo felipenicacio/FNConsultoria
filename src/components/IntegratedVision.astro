@@ -1,6 +1,6 @@
 ---
 /**
- * Visão integrada — FEL-41
+ * Visão integrada — FEL-41 / ajuste FEL-52
  *
  * Seção conceitual de posicionamento da FN Security.
  * Posição na Home: após Serviços, antes da Jornada.
@@ -14,15 +14,19 @@
  * - imagem como protagonista visual
  * - não sugerir sequência obrigatória
  * - sem crop da imagem
+ *
+ * FEL-52 (ajuste validação visual):
+ * - título "Segurança da Informação orientada por riscos..." removido
+ *   (duplicava mensagem do Hero; aprovado no Notion 14)
+ * - abertura compactada: eyebrow + dois parágrafos + diagrama
  */
 ---
 
-<section class="section vision-section" aria-labelledby="vision-title">
+<section class="section vision-section" aria-label="Visão integrada">
   <div class="container">
 
     <div class="vision-header">
       <p class="eyebrow">Visão integrada</p>
-      <h2 id="vision-title">Segurança da Informação orientada por riscos e prioridades do negócio</h2>
       <div class="vision-text">
         <p class="lead">
           A Segurança da Informação deve partir do contexto da organização, considerar
@@ -61,29 +65,22 @@
 <style>
   .vision-section { background: var(--navy-950); color: white; overflow: hidden; }
 
-  /* Header de texto */
+  /* Abertura compactada — eyebrow + dois parágrafos sem título */
   .vision-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(3rem, 6vw, 6rem);
-    align-items: start;
-    padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 68ch;
+    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
   }
 
-  .vision-section .eyebrow { color: #7dd3fc; }
+  .vision-section .eyebrow { color: #7dd3fc; margin: 0; }
 
-  .vision-header h2 {
-    color: white;
-    font-size: clamp(1.9rem, 3.5vw, 3rem);
-    line-height: 1.15;
-    margin: 0;
-  }
-
-  .vision-text { padding-top: .25rem; }
+  .vision-text { display: flex; flex-direction: column; gap: .75rem; }
 
   .vision-text .lead {
     color: #cbd5e1;
-    margin-bottom: 1rem;
+    margin: 0;
   }
 
   .vision-text p:not(.lead) {
@@ -99,8 +96,6 @@
     overflow: hidden;
     border: 1px solid rgba(255,255,255,.08);
     box-shadow: 0 24px 64px rgba(0,0,0,.35);
-    /* Reserva o espaço com a proporção exata (1200×900 = 4:3)
-       para evitar layout shift (CLS) antes do carregamento */
     aspect-ratio: 4 / 3;
     background: #07111f;
   }
@@ -110,27 +105,13 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* object-fit: contain preserva a proporção e evita crop */
-  }
-
-  /* Responsividade */
-  @media (max-width: 860px) {
-    .vision-header {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
   }
 
   @media (max-width: 600px) {
-    /* Em mobile, a imagem pode ficar pequena com aspect-ratio 4:3.
-       Removemos a restrição de altura para que o browser calcule
-       naturalmente, garantindo que os textos internos do diagrama
-       permaneçam legíveis sem overflow horizontal. */
     .vision-image-wrap {
       border-radius: var(--radius-lg);
       aspect-ratio: auto;
     }
-
     .vision-image {
       height: auto;
       object-fit: contain;
