@@ -1,29 +1,108 @@
-<section class="section about" aria-labelledby="about-title">
-  <div class="container about-grid">
-    <div class="about-heading">
-      <p class="eyebrow">FN Security</p>
-      <h2 id="about-title">Segurança como disciplina de gestão.</h2>
-      <span class="rule" aria-hidden="true"></span>
-    </div>
-    <div class="about-copy">
-      <p class="lead">A proteção das informações exige governança, gestão de riscos, processos, pessoas e decisões alinhadas aos objetivos do negócio.</p>
-      <p>A FN Security apoia organizações na estruturação e evolução de programas de Segurança da Informação, transformando requisitos técnicos, riscos e referências reconhecidas em modelos de gestão aplicáveis à realidade de cada organização.</p>
-      <div class="pill-row" aria-label="Princípios de atuação">
-        <span>Governança</span><span>Riscos</span><span>Estratégia</span><span>Resiliência</span><span>Pessoas</span>
+<!--
+  Bloco de contexto/problemas — FEL-40
+  Objetivo: criar reconhecimento pelos gatilhos de compra antes de apresentar serviços.
+  Fonte: Notion 04 — Tom de Voz e Conteúdo da Home, seção 3.
+-->
+<section class="section context-section" aria-labelledby="context-title">
+  <div class="container">
+    <div class="context-header">
+      <div>
+        <p class="eyebrow">Para quem é</p>
+        <h2 id="context-title">Organizações que reconhecem estes desafios.</h2>
       </div>
+      <p class="lead context-lead">
+        A FN Security atua quando a Segurança da Informação precisa sair do reativo
+        e se tornar uma capacidade de gestão conectada aos riscos e prioridades do negócio.
+      </p>
     </div>
+
+    <ul class="context-grid" role="list" aria-label="Principais contextos de atuação">
+      <li class="context-card">
+        <span class="context-icon" aria-hidden="true">01</span>
+        <strong>Falta de direção e prioridades</strong>
+        <p>Iniciativas de segurança fragmentadas, sem critérios claros de priorização ou alinhamento com os objetivos do negócio.</p>
+      </li>
+      <li class="context-card">
+        <span class="context-icon" aria-hidden="true">02</span>
+        <strong>Necessidade de avaliar exposição e maturidade</strong>
+        <p>Ausência de visão consolidada do cenário atual, lacunas relevantes e estado-alvo das capacidades de Segurança da Informação.</p>
+      </li>
+      <li class="context-card">
+        <span class="context-icon" aria-hidden="true">03</span>
+        <strong>Requisitos de auditoria, certificação ou regulação</strong>
+        <p>Pressão de clientes, contratos ou reguladores por conformidade, evidências de controles ou certificação ISO/IEC 27001.</p>
+      </li>
+      <li class="context-card">
+        <span class="context-icon" aria-hidden="true">04</span>
+        <strong>Necessidade de estruturar governança e gestão</strong>
+        <p>Ausência de liderança especializada, sistema de gestão, estrutura de riscos, planos de continuidade ou programa de conscientização.</p>
+      </li>
+    </ul>
   </div>
 </section>
 
 <style>
-  .about { position: relative; }
-  .about-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(3rem, 7vw, 7rem); align-items: start; }
-  .about-heading { position: sticky; top: 110px; }
-  .rule { display: block; width: 72px; height: 2px; margin-top: 2rem; background: linear-gradient(90deg, var(--blue-600), var(--teal-500)); }
-  .about-copy { padding-top: .25rem; }
-  .about-copy .lead { color: var(--navy-900); }
-  .about-copy > p:not(.lead) { max-width: 64ch; }
-  .pill-row { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid var(--slate-200); }
-  .pill-row span { padding: .5rem .75rem; border: 1px solid var(--slate-200); border-radius: 999px; color: var(--slate-700); background: var(--white); font-size: .82rem; font-weight: 750; }
-  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 1.5rem; } .about-heading { position: static; } }
+  .context-section { background: var(--white); }
+
+  .context-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: end;
+    margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  }
+  .context-lead { margin: 0; }
+
+  .context-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--slate-200);
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .context-card {
+    background: var(--white);
+    padding: clamp(1.5rem, 2.5vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    transition: background .2s ease;
+  }
+  .context-card:hover { background: var(--slate-100); }
+
+  .context-icon {
+    display: inline-block;
+    color: var(--blue-600);
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .14em;
+  }
+
+  .context-card strong {
+    display: block;
+    color: var(--navy-950);
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .context-card p {
+    margin: 0;
+    color: var(--slate-700);
+    font-size: .88rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .context-header { grid-template-columns: 1fr; gap: 1.4rem; }
+    .context-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .context-grid { grid-template-columns: 1fr; }
+  }
 </style>
