@@ -1,33 +1,34 @@
 ---
 /**
- * Jornada de atuação — Home.
+ * Jornada de atuação — Home. FEL-40.
  *
- * As etapas são conceituais e aprovadas na Fase 1.
- * Os nomes de serviço associados a cada etapa são referências informativas
- * baseadas na FEL-18 e não constituem hierarquia comercial definitiva
- * (essa definição ocorre na FEL-24).
+ * Apresentada como caminhos possíveis de evolução, não como sequência
+ * rígida obrigatória para todos os clientes.
+ *
+ * Mapeamento completo dos 9 serviços conforme baseline do Notion (04).
+ * Nomenclatura baseada na FEL-24 (aberta) — pode evoluir.
  */
 
 const journey = [
   {
     step: 'Avaliar',
-    description: 'Compreender o cenário atual, identificar lacunas e definir prioridades.',
-    services: ['Assessment NIST CSF 2.0', 'Auditoria e Readiness'],
+    description: 'Compreender o cenário atual, identificar lacunas e definir estado-alvo.',
+    services: ['Assessment NIST CSF 2.0', 'Auditoria Interna e Readiness'],
   },
   {
     step: 'Planejar',
-    description: 'Transformar contexto e riscos em objetivos, iniciativas e roadmap.',
-    services: ['PESI'],
+    description: 'Transformar diagnóstico em objetivos, prioridades e roadmap de evolução.',
+    services: ['PESI', 'Gestão de Riscos'],
   },
   {
     step: 'Governar',
-    description: 'Estruturar responsabilidades, indicadores e acompanhamento executivo.',
-    services: ['CISO como Serviço'],
+    description: 'Estruturar liderança, indicadores e acompanhamento executivo contínuo.',
+    services: ['CISO como Serviço', 'Gestão de Riscos'],
   },
   {
     step: 'Implementar',
-    description: 'Estruturar sistemas de gestão, controles e capacidades de segurança.',
-    services: ['SGSI ISO/IEC 27001'],
+    description: 'Construir sistemas de gestão, controles e capacidades especializadas.',
+    services: ['SGSI ISO/IEC 27001', 'Continuidade de Negócios', 'Governança de Privacidade'],
   },
   {
     step: 'Desenvolver cultura',
@@ -36,8 +37,8 @@ const journey = [
   },
   {
     step: 'Evoluir',
-    description: 'Sustentar ciclos de revisão, melhoria contínua e gestão de riscos.',
-    services: ['Gestão contínua'],
+    description: 'Ciclos contínuos de revisão, reassessment, auditoria e melhoria.',
+    services: ['CISO recorrente', 'Reassessments', 'Auditorias'],
   },
 ] as const;
 ---
@@ -46,20 +47,21 @@ const journey = [
   <div class="container">
     <div class="section-header journey-header">
       <div>
-        <p class="eyebrow">Jornada</p>
-        <h2 id="jornada-title">Uma evolução integrada em Segurança da Informação.</h2>
+        <p class="eyebrow">Como os serviços se conectam</p>
+        <h2 id="jornada-title">Caminhos possíveis, não uma sequência obrigatória.</h2>
       </div>
-      <p class="lead">
-        Os serviços se conectam como etapas de uma mesma capacidade de gestão:
-        compreender o cenário, priorizar decisões, estruturar controles e sustentar evolução.
+      <p class="lead journey-lead">
+        Cada organização começa de um ponto diferente. Os serviços da FN Security
+        podem ser contratados de forma independente ou combinados conforme
+        o contexto, a maturidade e as prioridades do momento.
       </p>
     </div>
 
-    <ol class="journey" aria-label="Etapas da jornada de Segurança da Informação">
+    <ol class="journey" aria-label="Caminhos de evolução em Segurança da Informação">
       {journey.map(({ step, description, services }, index) => (
         <li>
           <div class="step-top">
-            <span class="index" aria-label={`Etapa ${index + 1}`}>
+            <span class="index" aria-label={`Caminho ${index + 1}`}>
               {String(index + 1).padStart(2, '0')}
             </span>
             {index < journey.length - 1 && (
@@ -68,7 +70,7 @@ const journey = [
           </div>
           <strong class="step-name">{step}</strong>
           <p class="step-desc">{description}</p>
-          <ul class="step-services" aria-label={`Serviços associados: ${step}`}>
+          <ul class="step-services" aria-label={`Serviços para: ${step}`}>
             {services.map((s) => <li>{s}</li>)}
           </ul>
         </li>
@@ -86,7 +88,7 @@ const journey = [
     gap: 4rem;
     align-items: end;
   }
-  .journey-header .lead { margin: 0; }
+  .journey-lead { margin: 0; }
 
   .journey {
     list-style: none;
