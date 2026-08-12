@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 620" role="img" aria-label="Escudo FN Security">
+  <defs>
+    <!-- Gradientes do escudo -->
+    <radialGradient id="shieldGlow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#1e5fa8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0a1f3d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shieldBody" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#1a4a8a"/>
+      <stop offset="40%" stop-color="#0d2d5e"/>
+      <stop offset="100%" stop-color="#061528"/>
+    </linearGradient>
+    <linearGradient id="shieldEdge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a90d9"/>
+      <stop offset="35%" stop-color="#2a6abf"/>
+      <stop offset="65%" stop-color="#1a4a8a"/>
+      <stop offset="100%" stop-color="#0d2d5e"/>
+    </linearGradient>
+    <linearGradient id="shieldInner" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#163e72"/>
+      <stop offset="100%" stop-color="#08192e"/>
+    </linearGradient>
+    <radialGradient id="innerGlow" cx="50%" cy="42%" r="45%">
+      <stop offset="0%" stop-color="#2a7fd4" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#1040a0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#061528" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shieldAura" cx="50%" cy="55%" r="50%">
+      <stop offset="0%" stop-color="#1e6bbf" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#0f3f8a" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#061528" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="outerGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="shieldClip">
+      <path d="M280 30 L490 110 L490 290 Q490 430 280 560 Q70 430 70 290 L70 110 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Aura exterior difusa -->
+  <ellipse cx="280" cy="340" rx="190" ry="160" fill="url(#shieldAura)" opacity="0.6"/>
+
+  <!-- Rede digital exterior — pontos e linhas -->
+  <!-- Linhas de rede exteriores ao escudo -->
+  <g opacity="0.22" stroke="#4a90d9" stroke-width="0.8" fill="none">
+    <line x1="60" y1="180" x2="100" y2="240"/>
+    <line x1="100" y1="240" x2="70" y2="310"/>
+    <line x1="100" y1="240" x2="150" y2="280"/>
+    <line x1="30" y1="290" x2="70" y2="310"/>
+    <line x1="70" y1="310" x2="50" y2="380"/>
+    <line x1="500" y1="170" x2="460" y2="230"/>
+    <line x1="460" y1="230" x2="490" y2="300"/>
+    <line x1="490" y1="300" x2="520" y2="370"/>
+    <line x1="460" y1="230" x2="420" y2="270"/>
+    <line x1="50" y1="420" x2="90" y2="460"/>
+    <line x1="90" y1="460" x2="140" y2="500"/>
+    <line x1="490" y1="410" x2="450" y2="460"/>
+    <line x1="450" y1="460" x2="400" y2="510"/>
+    <line x1="160" y1="540" x2="220" y2="570"/>
+    <line x1="380" y1="545" x2="330" y2="572"/>
+  </g>
+  <!-- Pontos de rede exteriores -->
+  <g fill="#4a90d9">
+    <circle cx="60"  cy="180" r="3" opacity="0.35"/>
+    <circle cx="100" cy="240" r="4" opacity="0.30"/>
+    <circle cx="30"  cy="290" r="2.5" opacity="0.25"/>
+    <circle cx="70"  cy="310" r="3.5" opacity="0.30"/>
+    <circle cx="50"  cy="380" r="2.5" opacity="0.22"/>
+    <circle cx="90"  cy="460" r="3" opacity="0.20"/>
+    <circle cx="140" cy="500" r="2" opacity="0.18"/>
+    <circle cx="500" cy="170" r="3" opacity="0.35"/>
+    <circle cx="460" cy="230" r="4" opacity="0.30"/>
+    <circle cx="490" cy="300" r="3.5" opacity="0.28"/>
+    <circle cx="520" cy="370" r="2.5" opacity="0.22"/>
+    <circle cx="450" cy="460" r="3" opacity="0.20"/>
+    <circle cx="400" cy="510" r="2" opacity="0.18"/>
+    <circle cx="220" cy="570" r="2.5" opacity="0.18"/>
+    <circle cx="330" cy="572" r="2.5" opacity="0.18"/>
+    <circle cx="150" cy="280" r="2" opacity="0.22"/>
+    <circle cx="420" cy="270" r="2" opacity="0.22"/>
+  </g>
+
+  <!-- Anel de luz no chão -->
+  <ellipse cx="280" cy="540" rx="130" ry="18" fill="#1e6bbf" opacity="0.18" filter="url(#glow)"/>
+  <ellipse cx="280" cy="540" rx="80" ry="10" fill="#4a90d9" opacity="0.22" filter="url(#glow)"/>
+
+  <!-- Escudo — borda exterior com gradiente metálico -->
+  <path d="M280 28 L492 112 L492 292 Q492 438 280 565 Q68 438 68 292 L68 112 Z"
+        fill="url(#shieldEdge)" filter="url(#outerGlow)"/>
+
+  <!-- Escudo — corpo principal -->
+  <path d="M280 44 L476 122 L476 290 Q476 426 280 548 Q84 426 84 290 L84 122 Z"
+        fill="url(#shieldBody)"/>
+
+  <!-- Escudo — camada interna com gradiente -->
+  <path d="M280 60 L460 132 L460 288 Q460 414 280 530 Q100 414 100 288 L100 132 Z"
+        fill="url(#shieldInner)"/>
+
+  <!-- Brilho interno difuso -->
+  <path d="M280 60 L460 132 L460 288 Q460 414 280 530 Q100 414 100 288 L100 132 Z"
+        fill="url(#innerGlow)"/>
+
+  <!-- Rede digital interna ao escudo -->
+  <g clip-path="url(#shieldClip)" opacity="0.28">
+    <g stroke="#6ab0f5" stroke-width="0.7" fill="none">
+      <line x1="120" y1="150" x2="180" y2="210"/>
+      <line x1="180" y1="210" x2="160" y2="290"/>
+      <line x1="180" y1="210" x2="240" y2="190"/>
+      <line x1="240" y1="190" x2="280" y2="150"/>
+      <line x1="240" y1="190" x2="280" y2="240"/>
+      <line x1="320" y1="190" x2="280" y2="150"/>
+      <line x1="320" y1="190" x2="380" y2="210"/>
+      <line x1="380" y1="210" x2="400" y2="290"/>
+      <line x1="380" y1="210" x2="320" y2="240"/>
+      <line x1="160" y1="290" x2="200" y2="360"/>
+      <line x1="400" y1="290" x2="360" y2="360"/>
+      <line x1="200" y1="360" x2="240" y2="420"/>
+      <line x1="360" y1="360" x2="320" y2="420"/>
+      <line x1="240" y1="420" x2="280" y2="470"/>
+      <line x1="320" y1="420" x2="280" y2="470"/>
+      <line x1="280" y1="150" x2="280" y2="240"/>
+      <line x1="200" y1="360" x2="280" y2="340"/>
+      <line x1="360" y1="360" x2="280" y2="340"/>
+    </g>
+    <g fill="#6ab0f5">
+      <circle cx="120" cy="150" r="2.5"/>
+      <circle cx="180" cy="210" r="3"/>
+      <circle cx="240" cy="190" r="2.5"/>
+      <circle cx="320" cy="190" r="2.5"/>
+      <circle cx="380" cy="210" r="3"/>
+      <circle cx="160" cy="290" r="2"/>
+      <circle cx="400" cy="290" r="2"/>
+      <circle cx="200" cy="360" r="2.5"/>
+      <circle cx="360" cy="360" r="2.5"/>
+      <circle cx="240" cy="420" r="2"/>
+      <circle cx="320" cy="420" r="2"/>
+      <circle cx="280" cy="340" r="3"/>
+    </g>
+  </g>
+
+  <!-- Reflexo diagonal no escudo (highlight) -->
+  <path d="M280 60 L380 110 L340 160 L200 120 Z"
+        fill="white" opacity="0.06"/>
+
+  <!-- Aro de luz central -->
+  <circle cx="280" cy="300" r="90" fill="none" stroke="#2a7fd4" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="280" cy="300" r="70" fill="none" stroke="#4a90d9" stroke-width="0.5" opacity="0.18"/>
+
+  <!-- Fechadura — keyhole -->
+  <!-- Círculo da fechadura -->
+  <circle cx="280" cy="276" r="38" fill="#0a1f3d" opacity="0.6"/>
+  <circle cx="280" cy="276" r="38" fill="none" stroke="#6ab0f5" stroke-width="1.2" opacity="0.4"/>
+  <!-- Buraco da fechadura — formato keyhole -->
+  <g filter="url(#softGlow)">
+    <!-- Círculo branco superior -->
+    <circle cx="280" cy="268" r="18" fill="white" opacity="0.95"/>
+    <!-- Triângulo inferior branco -->
+    <path d="M262 280 L298 280 L292 322 L268 322 Z" fill="white" opacity="0.95"/>
+    <!-- Remoção circular central (criar o buraco) -->
+    <circle cx="280" cy="268" r="9" fill="#0d2d5e" opacity="0.8"/>
+  </g>
+
+  <!-- Anel brilhante ao redor da fechadura -->
+  <circle cx="280" cy="286" r="48" fill="none" stroke="#4a90d9" stroke-width="1.5" opacity="0.30" filter="url(#glow)"/>
+
+  <!-- Partículas luminosas internas -->
+  <g fill="#a0d0ff" opacity="0.5">
+    <circle cx="190" cy="180" r="1.5"/>
+    <circle cx="230" cy="155" r="1"/>
+    <circle cx="210" cy="410" r="1.5"/>
+    <circle cx="350" cy="165" r="1"/>
+    <circle cx="370" cy="180" r="1.5"/>
+    <circle cx="350" cy="420" r="1.5"/>
+    <circle cx="160" cy="340" r="1"/>
+    <circle cx="400" cy="330" r="1"/>
+    <circle cx="280" cy="140" r="1.5"/>
+    <circle cx="250" cy="460" r="1"/>
+    <circle cx="310" cy="455" r="1"/>
+  </g>
+
+  <!-- Reflexo superior do escudo -->
+  <path d="M280 44 L460 132 L440 160 L300 100 L280 60 Z"
+        fill="white" opacity="0.04"/>
+
+  <!-- Borda luminosa do escudo -->
+  <path d="M280 28 L492 112 L492 292 Q492 438 280 565 Q68 438 68 292 L68 112 Z"
+        fill="none" stroke="#4a90d9" stroke-width="1.5" opacity="0.35"/>
+</svg>
