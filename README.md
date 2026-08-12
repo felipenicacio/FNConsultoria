@@ -1,10 +1,12 @@
-# FN Consulting
+# FN Security
 
-Site institucional da **FN Consulting**, consultoria especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade.
+Site institucional da **FN Security** (nome empresarial: FN Privacy Security), consultoria especializada em Segurança da Informação, Governança, Gestão de Riscos, Continuidade de Negócios e Privacidade.
 
-O projeto tem como objetivo construir uma presença digital profissional, rápida, segura, acessível e preparada para evolução, apresentando a FN Consulting como uma consultoria boutique com atuação orientada por riscos, estratégia e referências reconhecidas internacionalmente.
+O projeto tem como objetivo construir uma presença digital profissional, rápida, segura, acessível e preparada para evolução, apresentando a FN Security como uma consultoria boutique com atuação orientada por riscos, estratégia e referências reconhecidas internacionalmente.
 
 **Consultor responsável:** Felipe Nicácio
+
+> **Nota de transição de marca:** este projeto foi iniciado sob a marca **FN Consulting**. A transição para **FN Security** está em execução (FEL-29). O repositório GitHub (`felipenicacio/FNConsultoria`) não é renomeado nesta etapa — análise de impacto pendente.
 
 ---
 
@@ -12,7 +14,7 @@ O projeto tem como objetivo construir uma presença digital profissional, rápid
 
 O site será inicialmente uma **landing page institucional estática**, com foco em:
 
-- posicionamento da marca FN Consulting;
+- posicionamento da marca FN Security;
 - apresentação clara dos serviços;
 - autoridade técnica e credibilidade profissional;
 - experiência de navegação simples e responsiva;
@@ -52,7 +54,7 @@ Desenvolvimento de programas contínuos de conscientização orientados à mudan
 
 ## Jornada de atuação
 
-Os serviços da FN Consulting devem ser apresentados como partes de uma jornada integrada de evolução:
+Os serviços da FN Security devem ser apresentados como partes de uma jornada integrada de evolução:
 
 ```text
 Avaliar
@@ -164,7 +166,7 @@ A primeira versão deverá ser organizada em componentes com responsabilidades c
 
 ## Identidade visual
 
-A FN Consulting deverá possuir uma identidade corporativa moderna, sóbria e consultiva.
+A FN Security deverá possuir uma identidade corporativa moderna, sóbria e consultiva.
 
 Diretrizes principais:
 
@@ -257,7 +259,7 @@ Princípios:
 
 O projeto deverá trabalhar semanticamente temas relacionados a:
 
-- FN Consulting;
+- FN Security;
 - Consultoria em Segurança da Informação;
 - CISO como Serviço;
 - vCISO;
@@ -346,7 +348,7 @@ Ele concentra visão, escopo, arquitetura, requisitos, UX/UI, segurança, privac
 
 Toda nova funcionalidade deverá responder à seguinte pergunta:
 
-> **Essa funcionalidade melhora a comunicação institucional, a autoridade, a experiência do usuário ou a geração de oportunidades para a FN Consulting?**
+> **Essa funcionalidade melhora a comunicação institucional, a autoridade, a experiência do usuário ou a geração de oportunidades para a FN Security?**
 
 Se não houver benefício claro, sua implementação deverá ser questionada para preservar a simplicidade arquitetural.
 
@@ -361,5 +363,5 @@ Se não houver benefício claro, sua implementação deverá ser questionada par
 ## Responsável
 
 **Felipe Nicácio**  
-FN Consulting  
+FN Security  
 Segurança da Informação · Governança · Gestão de Riscos · Continuidade de Negócios · Privacidade

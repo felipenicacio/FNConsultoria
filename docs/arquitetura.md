@@ -1,4 +1,4 @@
-# Arquitetura Técnica — FN Consulting Site
+# Arquitetura Técnica — FN Security Site
 
 > Fonte de verdade: Notion (decisões), Linear (execução), GitHub (implementação).
 
