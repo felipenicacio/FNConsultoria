@@ -1,0 +1,108 @@
+# ============================================================
+# OWASP ZAP Baseline — Preview Cloudflare PR #17
+# FEL-39 — Security Gate V1
+#
+# Executa SOMENTE via workflow_dispatch (manual).
+# Alvo FIXO: preview da PR #17 (não produção).
+# Baseline/passive scan apenas — sem active scan, fuzzing ou DoS.
+# fail_action: false — primeiro run para triagem dos findings.
+# allow_issue_writing: false — sem criação automática de Issues.
+#
+# SHA verificado via API GitHub em 2026-08-13:
+#   zaproxy/action-baseline@v0.15.0 → de8ad967d3548d44ef623df22cf95c3b0baf8b25
+#   actions/upload-artifact@v4      → ea165f8d65b6e75b540449e92b4886f43607fa02
+# ============================================================
+name: ZAP Baseline — Preview PR #17
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # ── Job 1: Validação de headers HTTP ──────────────────────
+  headers:
+    name: Validar headers HTTP do Preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checar headers do Preview
+        # Registra os headers entregues pelo Cloudflare Preview.
+        # Falha apenas se algum dos security headers obrigatórios estiver
+        # completamente ausente no response.
+        run: |
+          set -euo pipefail
+
+          TARGET="https://a1e5d904.fnconsultoria.pages.dev"
+          echo "Alvo: $TARGET"
+          echo ""
+
+          HEADERS=$(curl -sSI "$TARGET")
+          echo "=== Headers brutos ==="
+          echo "$HEADERS"
+          echo ""
+
+          echo "=== Verificação de security headers ==="
+          FAIL=0
+
+          for HEADER in \
+            "content-security-policy" \
+            "strict-transport-security" \
+            "x-content-type-options" \
+            "referrer-policy" \
+            "permissions-policy" \
+            "x-frame-options"; do
+            if echo "$HEADERS" | grep -qi "^${HEADER}:"; then
+              VALUE=$(echo "$HEADERS" | grep -i "^${HEADER}:" | head -1 | sed 's/^[^:]*: *//')
+              echo "  ✅  $HEADER: $VALUE"
+            else
+              echo "  ❌  $HEADER: AUSENTE"
+              FAIL=1
+            fi
+          done
+
+          echo ""
+          if [ "$FAIL" -eq 1 ]; then
+            echo "FALHA: um ou mais security headers obrigatórios estão ausentes."
+            exit 1
+          else
+            echo "OK: todos os security headers confirmados."
+          fi
+
+  # ── Job 2: ZAP Baseline Scan ──────────────────────────────
+  zap:
+    name: ZAP Baseline Scan — Preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: headers
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.2.2
+
+      - name: ZAP Baseline Scan
+        # zaproxy/action-baseline v0.15.0
+        # SHA do commit verificado via API GitHub em 2026-08-13
+        uses: zaproxy/action-baseline@de8ad967d3548d44ef623df22cf95c3b0baf8b25 # v0.15.0
+        with:
+          target: 'https://a1e5d904.fnconsultoria.pages.dev'
+          docker_name: 'ghcr.io/zaproxy/zaproxy:stable'
+          fail_action: false         # primeiro run: triagem antes de definir gate
+          allow_issue_writing: false # sem criação automática de Issues
+          artifact_name: 'zap-preview-report'
+          cmd_options: '-a'          # -a: ajaxSpider (captura SPAs e links JS)
+
+      - name: Upload relatório ZAP
+        # Preserva o relatório HTML/JSON/XML como artefato por 14 dias
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: zap-preview-report
+          path: |
+            report_html.html
+            report_json.json
+            report_xml.xml
+          retention-days: 14
+          if-no-files-found: warn
