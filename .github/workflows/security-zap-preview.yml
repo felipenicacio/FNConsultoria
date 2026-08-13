@@ -3,20 +3,18 @@
 # FEL-39 — Security Gate V1
 #
 # NOTA DE TRIGGER:
-# workflow_dispatch requer que o arquivo esteja em main para ser
-# acionado via API/UI. Para esta execução de validação na PR #17,
-# o trigger inclui push restrito à branch da PR.
-# Após merge em main, o trigger será exclusivamente workflow_dispatch.
+# workflow_dispatch requer que o arquivo esteja em main.
+# Trigger push restrito à branch da PR para esta validação.
+# Após merge em main: somente workflow_dispatch.
 #
-# Alvo FIXO: preview da PR #17 (não produção).
-# Baseline/passive scan apenas — sem active scan, fuzzing ou DoS.
-# fail_action: false — primeiro run para triagem dos findings.
-# allow_issue_writing: false — sem criação automática de Issues.
+# Alvo FIXO: preview da PR #17 — NÃO produção.
+# Baseline/passive scan — SEM active scan, fuzzing ou DoS.
+# fail_action: false — primeiro run para triagem.
+# allow_issue_writing: false — sem Issues automáticas.
 #
 # SHAs verificados via API GitHub em 2026-08-13:
-#   zaproxy/action-baseline@v0.15.0 → de8ad967d3548d44ef623df22cf95c3b0baf8b25
-#   actions/upload-artifact@v4.6.2  → ea165f8d65b6e75b540449e92b4886f43607fa02
-#   actions/checkout@v4.2.2         → 11d5960a326750d5838078e36cf38b85af677262
+#   zaproxy/action-baseline v0.15.0 → de8ad967d3548d44ef623df22cf95c3b0baf8b25
+#   actions/checkout v4.2.2         → 11d5960a326750d5838078e36cf38b85af677262
 # ============================================================
 name: ZAP Baseline — Preview PR #17
 
@@ -42,19 +40,15 @@ jobs:
       - name: Checar headers do Preview
         run: |
           set -euo pipefail
-
           TARGET="https://a1e5d904.fnconsultoria.pages.dev"
           echo "Alvo: $TARGET"
           echo ""
-
           HEADERS=$(curl -sSI "$TARGET" 2>&1)
           echo "=== Headers brutos ==="
           echo "$HEADERS"
           echo ""
-
           echo "=== Verificação de security headers ==="
           FAIL=0
-
           for HEADER in \
             "content-security-policy" \
             "strict-transport-security" \
@@ -70,7 +64,6 @@ jobs:
               FAIL=1
             fi
           done
-
           echo ""
           if [ "$FAIL" -eq 1 ]; then
             echo "FALHA: um ou mais security headers obrigatórios estão ausentes."
@@ -91,6 +84,8 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.2.2
 
       - name: ZAP Baseline Scan
+        # zaproxy/action-baseline v0.15.0 faz upload do artefato internamente
+        # com o nome definido em artifact_name — não duplicar upload.
         uses: zaproxy/action-baseline@de8ad967d3548d44ef623df22cf95c3b0baf8b25 # v0.15.0
         with:
           target: 'https://a1e5d904.fnconsultoria.pages.dev'
@@ -99,15 +94,3 @@ jobs:
           allow_issue_writing: false
           artifact_name: 'zap-preview-report'
           cmd_options: '-a'
-
-      - name: Upload relatório ZAP
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        if: always()
-        with:
-          name: zap-preview-report
-          path: |
-            report_html.html
-            report_json.json
-            report_xml.xml
-          retention-days: 14
-          if-no-files-found: warn
