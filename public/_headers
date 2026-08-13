@@ -27,17 +27,6 @@
   # USB, sensores de movimento ou outras APIs sensíveis
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=(), interest-cohort=()
 
-  # ── CORS ───────────────────────────────────────────────────
-  # Cloudflare Pages adiciona Access-Control-Allow-Origin: * por padrão
-  # em todos os assets estáticos (comportamento built-in da plataforma).
-  # Para um site institucional público, sem API, sem sessões e sem
-  # endpoints sensíveis, o risco real é mínimo. No entanto, o wildcard
-  # CORS é desnecessário: o site não precisa ser carregado cross-origin
-  # por terceiros. Removido explicitamente para reduzir superfície e
-  # eliminar o finding ZAP-02 (Low).
-  # A notação "! Header" remove o header padrão do Cloudflare Pages.
-  ! Access-Control-Allow-Origin
-
   # ── Content Security Policy ─────────────────────────────────
   # Construída a partir do inventário real do site (FEL-39, fase 2):
   #

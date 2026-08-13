@@ -371,3 +371,97 @@ Todos os 6 security headers implementados em `public/_headers` foram confirmados
 **Medium abertos:** 0
 **Low abertos:** 0 (ZAP-02 corrigido)
 **Informacional abertos:** 2 (aceitos)
+
+---
+
+## ZAP-02 — Investigação definitiva do Access-Control-Allow-Origin
+
+**Data:** 2026-08-13
+**Resultado da tentativa anterior:** `! Access-Control-Allow-Origin` em `public/_headers` não removeu o header — confirmado pela validação real do preview após o commit `64aed73`.
+
+### Origem confirmada
+
+`Access-Control-Allow-Origin: *` está listado explicitamente como **"Headers always added"** na documentação oficial do Cloudflare Pages:
+https://developers.cloudflare.com/pages/configuration/serving-pages/
+
+```
+Headers always added:
+  Access-Control-Allow-Origin: *
+  Cf-Ray: $CLOUDFLARE_RAY_ID
+  Referrer-Policy: strict-origin-when-cross-origin
+  Etag: $ETAG
+  Content-Type: $CONTENT_TYPE
+  X-Content-Type-Options: nosniff
+  Server: cloudflare
+```
+
+O header é adicionado pela **camada de serving de assets estáticos** do Cloudflare Pages — não por configuração do projeto, não por regra de Response Header Transform, não por Pages Function e não por `_headers`.
+
+### Por que `! Access-Control-Allow-Origin` não funcionou
+
+A notação `! Header` no `_headers` remove headers **adicionados por outras regras do próprio `_headers`** — não os headers built-in da camada de serving da plataforma. A documentação diz:
+
+> *"You may wish to remove a default header or a header which has been added by a more pervasive rule. This can be done by prepending the header name with an exclamation mark and space."*
+
+"A more pervasive rule" refere-se a regras mais amplas **do mesmo `_headers`** (ex.: `/*` → `/*.jpg`). Não há suporte documentado para remover os headers da categoria "always added" via `_headers`.
+
+A tentativa `! Access-Control-Allow-Origin` foi revertida no commit seguinte — não pertencia ao `_headers` e criava expectativa falsa de remoção.
+
+### Pode ser removido via `_headers`
+
+**Não.** Sem suporte documentado para remoção de headers "always added" da plataforma via `_headers`.
+
+### Exige Pages Function (Worker)
+
+Tecnicamente sim — uma Pages Function pode interceptar respostas e reconstruí-las sem o header. No entanto:
+- Introduz complexidade arquitetural significativa (servidor-side function num site 100% estático)
+- Aumenta latência
+- Cria nova superfície de ataque e manutenção
+- Não há precedente de uso de Worker apenas para remover um header de risco mínimo
+
+**Conclusão: complexidade desproporcional ao risco real.**
+
+### Avaliação de risco real
+
+| Condição | Status |
+|---|---|
+| Site 100% público | ✅ |
+| Nenhuma API | ✅ |
+| Nenhuma autenticação ou sessão | ✅ |
+| Nenhum cookie de sessão | ✅ |
+| Nenhum endpoint protegido | ✅ |
+| Nenhum dado sensível | ✅ |
+| Nenhuma operação state-changing | ✅ |
+| Nenhum recurso cujo acesso dependa de Same-Origin Policy | ✅ |
+
+`Access-Control-Allow-Origin: *` em conteúdo estático público não expõe dados adicionais quando os mesmos recursos já são acessíveis anonimamente pela Internet. O header apenas informa ao browser que outros origens podem fazer fetch dos mesmos assets públicos — o que já é verdade sem o header. O risco real é nulo para este perfil de site.
+
+### Decisão formal
+
+| Campo | Valor |
+|---|---|
+| Finding ZAP | ZAP-02 |
+| Severidade ZAP | Low |
+| Risco real | Informational / Accepted |
+| Status | **Accepted for V1** |
+| Justificativa | `Access-Control-Allow-Origin: *` é comportamento built-in não removível do Cloudflare Pages para assets estáticos. Em conteúdo 100% público, sem API, sessão ou dado sensível, não expõe informação adicional. Remoção via Pages Function é desproporcional. Aceito formalmente para V1. |
+| Reavaliação | Se o site adquirir API, autenticação ou conteúdo privado — reavaliar imediatamente. |
+
+### Critério de liberação V1 — estado final
+
+| Item | Status |
+|---|---|
+| High abertos | **0** ✅ |
+| Medium abertos | **0** ✅ |
+| Low abertos | **0** ✅ (ZAP-02 aceito formalmente) |
+| Informational | **2** ✅ (ZAP-01 aceito, ZAP-03 falso positivo) |
+| Todos os scanners (npm, Semgrep, Gitleaks, Trivy) | ✅ Limpos |
+| Security headers | ✅ Confirmados no preview |
+| CSP com hashes reais | ✅ |
+| Supply chain endurecida | ✅ |
+| Dependabot | ✅ |
+| Risco residual documentado | ✅ |
+| ZAP preview executado e triado | ✅ |
+| **Mudança técnica necessária antes do merge** | **NÃO** |
+
+**Todos os critérios de liberação da V1 estão atendidos. Nenhuma alteração adicional necessária.**
