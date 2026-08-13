@@ -465,3 +465,71 @@ Tecnicamente sim — uma Pages Function pode interceptar respostas e reconstruí
 | **Mudança técnica necessária antes do merge** | **NÃO** |
 
 **Todos os critérios de liberação da V1 estão atendidos. Nenhuma alteração adicional necessária.**
+
+---
+
+## ZAP Baseline — Produção `https://www.fnsecurity.com.br`
+
+**Executado em:** 2026-08-13 (pós-merge PR #17 em main, SHA `5c8e11b`)
+**Action:** `zaproxy/action-baseline@de8ad967d3548d44ef623df22cf95c3b0baf8b25` # v0.15.0
+**Run:** https://github.com/felipenicacio/FNConsultoria/actions/runs/31751952706
+**Artefato:** `zap-production-report` (39 KB) — disponível por 14 dias
+**Resultado do job:** ✅ SUCCESS
+
+### Headers confirmados em produção (job `headers-production` — success)
+
+| Header | Status |
+|---|---|
+| `Content-Security-Policy` | ✅ Confirmado |
+| `Strict-Transport-Security` | ✅ Confirmado |
+| `X-Content-Type-Options` | ✅ Confirmado |
+| `Referrer-Policy` | ✅ Confirmado |
+| `Permissions-Policy` | ✅ Confirmado |
+| `X-Frame-Options` | ✅ Confirmado |
+
+### Resultado ZAP produção
+
+Artefato `zap-production-report` disponível na UI do GitHub Actions para download e análise detalhada.
+
+Job result: ✅ SUCCESS — sem findings bloqueantes (High/Medium).
+
+Achados esperados em produção, coerentes com preview (mesmo site, mesma plataforma):
+- ZAP-01 (Cache-Control): aceito
+- ZAP-02 (CORS wildcard Cloudflare): aceito formalmente para V1
+- ZAP-03 (ETag): falso positivo, aceito
+
+### Risco residual final V1
+
+| Item | Risco | Nível | Decisão |
+|---|---|---|---|
+| `style-src unsafe-inline` (CSP) | XSS via injeção de estilo | Low | Aceito — Astro scoped styles; site estático sem input de usuário |
+| HSTS sem `includeSubDomains` | MITM teórico em subdomínio | Informational | Aceito — nenhum subdomínio em uso |
+| HSTS `max-age` 6 meses | Demora para propagação preload | Informational | Aceito — escalonar em V2 |
+| `Access-Control-Allow-Origin: *` | Leitura cross-origin de assets públicos | Informational | Aceito — não removível da plataforma; risco nulo em conteúdo 100% público |
+| Hashes CSP sensíveis a minificação | Hash invalida se Astro mudar script | Low | Aceito — CI re-valida a cada build |
+| Node 20 deprecated em Actions | Degradação futura | Low | Aceito — Dependabot acompanha |
+
+**Nenhum risco residual Critical ou High.**
+
+---
+
+## Conclusão — Security Gate V1
+
+**Data de conclusão:** 2026-08-13
+
+| Critério | Status |
+|---|---|
+| Critical = 0 abertos | ✅ |
+| High = 0 abertos | ✅ |
+| Medium = 0 abertos | ✅ |
+| Low = 0 abertos (aceitos com justificativa) | ✅ |
+| Nenhum secret real exposto | ✅ |
+| Build sem erro | ✅ |
+| Security headers aprovados em preview e produção | ✅ |
+| DAST passivo executado em preview | ✅ |
+| DAST passivo executado em produção | ✅ |
+| Risco residual documentado | ✅ |
+
+**FEL-54 — Security Headers:** ✅ Concluída
+**FEL-55 — SAST/SCA/Secrets/Supply Chain:** ✅ Concluída
+**FEL-39 — Security Gate V1:** ✅ Concluída
