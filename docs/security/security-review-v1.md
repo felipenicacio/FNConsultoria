@@ -244,3 +244,130 @@ upgrade-insecure-requests
 **Critical abertos:** 0
 **High abertos:** 0
 **Medium abertos:** 0 (C-02 e C-03 corrigidos; D-01 aceito com justificativa)
+
+---
+
+## ZAP Baseline — Preview `https://a1e5d904.fnconsultoria.pages.dev`
+
+**Executado em:** 2026-08-13
+**Action:** `zaproxy/action-baseline@de8ad967d3548d44ef623df22cf95c3b0baf8b25` # v0.15.0
+**Run:** https://github.com/felipenicacio/FNConsultoria/actions/runs/31749785694
+**Artefato:** `zap-preview-report` (32 KB) — disponível por 14 dias
+**Resultado do job:** ✅ SUCCESS (`fail_action: false` — primeiro run para triagem)
+
+### Sumário de alertas ZAP
+
+| Risco | Quantidade |
+|---|---|
+| High | **0** |
+| Medium | **0** |
+| Low | **1** |
+| Informational | **2** |
+
+**High: 0 — critério de liberação atendido.**
+**Medium: 0 — critério de liberação atendido.**
+
+### Findings detalhados
+
+#### ZAP-01 — Re-examine Cache-control Directives
+
+| Campo | Valor |
+|---|---|
+| ID | ZAP-01 |
+| Ferramenta | OWASP ZAP Baseline |
+| Risco | Informational |
+| CWE | CWE-525 |
+| OWASP | A05:2021 |
+| Evidência | `Cache-Control: no-cache` nas responses HTML |
+
+**Análise:** O Cloudflare Pages serve páginas HTML com `Cache-Control: no-cache` por padrão, garantindo que visitantes sempre recebam o conteúdo mais recente após deploy. Para um site institucional estático com ciclo de atualização baixo, este comportamento é adequado e intencional. O ZAP sinaliza como informacional para revisão — não indica vulnerabilidade.
+
+**Decisão:** Aceito. Nenhuma ação necessária.
+
+**Status:** ✅ Aceito — comportamento intencional do Cloudflare Pages para HTML
+
+---
+
+#### ZAP-02 — CORS Header Wildcard Access-Control-Allow-Origin
+
+| Campo | Valor |
+|---|---|
+| ID | ZAP-02 |
+| Ferramenta | OWASP ZAP Baseline |
+| Risco | Low |
+| CWE | CWE-942 |
+| OWASP | A05:2021 |
+| Evidência | `Access-Control-Allow-Origin: *` em todas as responses |
+
+**Análise — causa raiz:** O header `Access-Control-Allow-Origin: *` **não está em nenhum arquivo do projeto**. É adicionado automaticamente pelo Cloudflare Pages em todos os assets estáticos como comportamento built-in da plataforma (documentado em https://developers.cloudflare.com/pages/configuration/serving-pages/).
+
+**Risco real:** Mínimo. O site é estático, público, sem API, sem sessões de usuário e sem endpoints sensíveis. Assets públicos com CORS wildcard não representam risco de exfiltração de dados privados. No entanto, o header é desnecessário para a função do site e aumenta a superfície reportada.
+
+**Correção aplicada:** `! Access-Control-Allow-Origin` adicionado ao `public/_headers` via notação de remoção de headers do Cloudflare Pages. Esta instrução remove o header default da plataforma sem adicionar restrições desnecessárias.
+
+**Validação:** O header deve desaparecer após o next deploy do Cloudflare Pages com o `_headers` atualizado.
+
+**Status:** ✅ Corrigido — `! Access-Control-Allow-Origin` em `public/_headers`
+
+---
+
+#### ZAP-03 — Timestamp Disclosure via ETag
+
+| Campo | Valor |
+|---|---|
+| ID | ZAP-03 |
+| Ferramenta | OWASP ZAP Baseline |
+| Risco | Informational |
+| CWE | CWE-200 |
+| OWASP | A05:2021 |
+| Evidência | Sequência numérica no header `ETag` gerado pelo Cloudflare |
+
+**Análise:** O Cloudflare Pages gera ETags baseados em hash de conteúdo. O ZAP pode interpretar sequências numéricas longas em ETags como potencial timestamp disclosure. Os ETags do Cloudflare Pages são derivados do hash do conteúdo do arquivo, não de timestamps Unix. Este finding é um falso positivo para ETags de conteúdo.
+
+**Impacto real:** Nenhum. ETags de conteúdo não revelam informações sensíveis do servidor. São necessários para validação de cache eficiente.
+
+**Decisão:** Falso positivo — documentado e aceito. Nenhuma ação necessária.
+
+**Status:** ✅ Aceito como falso positivo — ETag de conteúdo gerado pelo Cloudflare
+
+---
+
+### Headers confirmados na validação (job `headers` — success)
+
+Todos os 6 security headers implementados em `public/_headers` foram confirmados presentes no preview:
+
+| Header | Status |
+|---|---|
+| `Content-Security-Policy` | ✅ Presente |
+| `Strict-Transport-Security` | ✅ Presente |
+| `X-Content-Type-Options` | ✅ Presente |
+| `Referrer-Policy` | ✅ Presente |
+| `Permissions-Policy` | ✅ Presente |
+| `X-Frame-Options` | ✅ Presente |
+| `Access-Control-Allow-Origin` | ⏳ Removido no commit seguinte — validar no próximo deploy |
+
+---
+
+## Critério de liberação V1 — estado atual
+
+- [x] npm audit limpo
+- [x] Semgrep limpo (0 findings bloqueantes)
+- [x] Gitleaks limpo (0 secrets)
+- [x] Trivy limpo (Critical 0 · High 0 · Medium 0 · Low 0)
+- [x] Security headers implementados e confirmados no preview
+- [x] CSP com hashes reais
+- [x] Supply chain endurecida (SHAs pinados)
+- [x] Dependabot configurado
+- [x] ZAP High: **0** — critério atendido
+- [x] ZAP Medium: **0** — critério atendido
+- [x] ZAP Low: 1 (ZAP-02 — CORS wildcard do Cloudflare Pages, corrigido)
+- [x] ZAP Informational: 2 (ZAP-01 aceito, ZAP-03 falso positivo)
+- [x] Risco residual documentado
+- [ ] Validação de headers após remoção do CORS wildcard (próximo deploy)
+- [ ] Autorização de Felipe Nicácio para merge
+
+**Critical abertos:** 0
+**High abertos:** 0
+**Medium abertos:** 0
+**Low abertos:** 0 (ZAP-02 corrigido)
+**Informacional abertos:** 2 (aceitos)
