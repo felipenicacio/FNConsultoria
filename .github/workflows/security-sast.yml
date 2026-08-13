@@ -1,0 +1,56 @@
+# ============================================================
+# SAST — Semgrep Community Edition
+# FEL-55 — Security Gate V1
+# Executa em: PR para main, push em main, workflow_dispatch,
+#             e semanalmente (quarta às 03:17 UTC)
+# ============================================================
+name: SAST — Semgrep
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '17 3 * * 3'  # quarta-feira 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write   # para upload SARIF quando disponível
+
+concurrency:
+  group: semgrep-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  semgrep:
+    name: Semgrep CE Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Run Semgrep CE
+        # Semgrep CE executado como container oficial — sem token SaaS necessário
+        # --config auto usa regras Community + detecção automática de linguagem
+        # Exit code 1 em findings de severidade ERROR (alta confiança)
+        run: |
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/src" \
+            semgrep/semgrep:latest \
+            semgrep scan \
+              --config auto \
+              --error \
+              --severity ERROR \
+              --exclude 'node_modules/**' \
+              --exclude 'dist/**' \
+              --exclude '.astro/**' \
+              --text \
+              /src
+        env:
+          SEMGREP_SEND_METRICS: "off"
