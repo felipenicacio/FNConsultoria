@@ -117,13 +117,15 @@ Não está previsto para a primeira versão:
 FNConsultoria/
 │
 ├── README.md
+├── AI_USAGE_POLICY.md
 ├── docs/
 │   ├── projeto.md
 │   ├── arquitetura.md
 │   ├── identidade-visual.md
 │   ├── conteudo.md
 │   ├── seo.md
-│   └── seguranca.md
+│   ├── seguranca.md
+│   └── ai-security-guardrails.md
 │
 ├── public/
 │   ├── favicon/
@@ -240,6 +242,13 @@ Mesmo sendo um site estático, o projeto deverá considerar controles compatíve
 
 Nenhuma credencial, token, chave de API ou informação sensível deverá ser armazenada no repositório.
 
+### Governança de uso de IA
+
+O uso de Inteligência Artificial no projeto deve seguir os seguintes documentos:
+
+- [`AI_USAGE_POLICY.md`](AI_USAGE_POLICY.md) — política executiva de uso responsável de IA;
+- [`docs/ai-security-guardrails.md`](docs/ai-security-guardrails.md) — guardrails técnicos de segurança, privacidade, rastreabilidade e controle de agentes e modelos generativos.
+
 ---
 
 ## Privacidade
@@ -340,7 +349,12 @@ O documento mestre do projeto está disponível em:
 
 [`docs/projeto.md`](docs/projeto.md)
 
-Ele concentra visão, escopo, arquitetura, requisitos, UX/UI, segurança, privacidade, SEO e roadmap detalhado do projeto.
+Documentos complementares de governança de IA:
+
+- [`AI_USAGE_POLICY.md`](AI_USAGE_POLICY.md)
+- [`docs/ai-security-guardrails.md`](docs/ai-security-guardrails.md)
+
+Eles complementam a documentação técnica com princípios executivos e controles específicos para uso de modelos e agentes de Inteligência Artificial.
 
 ---
 
